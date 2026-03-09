@@ -4,633 +4,424 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>DeckAI — AI Pitch Deck Generator for Indian Startups</title>
-<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,600;0,9..144,700;1,9..144,300;1,9..144,600&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
 <style>
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 :root{
-  /* Brand palette */
-  --blue:#1a4fff;
-  --blue-dk:#1239cc;
-  --blue-lt:#eef2ff;
-  --amber:#E8A020;
-  --amber-lt:#FEF3DC;
-
-  /* Neutrals — warm toned, like YC */
-  --ink:#17120E;
-  --sub:#6B6258;
-  --muted:#9C9489;
-  --border:#E3DDD6;
-  --border-lt:#EDE9E2;
-
-  /* Backgrounds — rich warm tinted, clearly not white */
-  --page:#F2EDE4;        /* main page — warm parchment, clearly non-white */
-  --section:#EAE3D8;     /* sections — deeper warm sand */
-  --card:#FAF7F2;        /* card surface — warm near-white */
-  --white:#FFFFFF;
-
-  /* Grid dot color for background texture */
-  --dot-color:rgba(26,47,80,0.09);
-
-  /* Status */
-  --green:#15803d;
-  --red:#dc2626;
+  --blue:#1847F0;--blue-dk:#1038c8;--blue-lt:#EEF2FF;
+  --amber:#F59E0B;--amber-lt:#FFFBEB;
+  --green:#059669;--red:#DC2626;
+  --ink:#0F0D0A;--sub:#4B4640;--muted:#8C8780;
+  --border:#E2DDD6;--border-lt:#EDEBE6;
+  --page:#F7F4EF;--section:#EDE9E2;--card:#FDFCFA;--white:#FFFFFF;
 }
-
-/* ── GLOBAL BACKGROUND — dot grid + warm atmosphere (YC-inspired) ── */
-body{
-  font-family:'DM Sans',sans-serif;
-  background:var(--page);
-  color:var(--ink);
-  font-size:15px;
-  line-height:1.6;
-  -webkit-font-smoothing:antialiased;
-}
-
-/* Dot grid pattern — like YC Startup School */
-body::before{
-  content:'';
-  position:fixed;top:0;left:0;width:100%;height:100%;
-  pointer-events:none;z-index:0;
-  background-image: radial-gradient(circle, var(--dot-color) 1px, transparent 1px);
-  background-size: 24px 24px;
-  opacity:0.85;
-}
-
-/* Warm gradient wash over entire page — gives depth like YC */
-body::after{
-  content:'';
-  position:fixed;top:0;left:0;width:100%;height:100%;
-  pointer-events:none;z-index:0;
-  background:
-    radial-gradient(ellipse 80% 60% at 15% 0%, rgba(26,79,255,0.055) 0%, transparent 60%),
-    radial-gradient(ellipse 70% 50% at 90% 100%, rgba(232,160,32,0.06) 0%, transparent 55%),
-    radial-gradient(ellipse 50% 40% at 50% 50%, rgba(26,47,80,0.025) 0%, transparent 70%);
-}
+body{font-family:'Plus Jakarta Sans',sans-serif;background:var(--page);color:var(--ink);font-size:15px;line-height:1.6;-webkit-font-smoothing:antialiased}
 *{position:relative;z-index:1}
 
-/* ── ANNOUNCEMENT BAR — YC-style top strip ── */
-.announce-bar{
-  background:var(--blue);
-  color:rgba(255,255,255,0.92);
-  font-size:12px;
-  font-weight:500;
-  letter-spacing:0.02em;
-  padding:9px 48px;
-  display:flex;align-items:center;justify-content:center;gap:8px;
-  position:relative;z-index:200;
-}
-.announce-dot{
-  width:6px;height:6px;border-radius:50%;
-  background:var(--amber);flex-shrink:0;
-}
-.announce-arrow{color:var(--amber);font-weight:700}
+/* ANNOUNCE */
+.announce-bar{background:var(--ink);color:rgba(255,255,255,0.8);font-size:12.5px;font-weight:500;padding:10px 48px;display:flex;align-items:center;justify-content:center;gap:10px;z-index:200}
+.announce-pill{background:var(--amber);color:var(--ink);font-size:10px;font-weight:700;padding:2px 8px;border-radius:20px;letter-spacing:.05em;text-transform:uppercase;flex-shrink:0}
+.announce-cta{color:var(--amber);font-weight:600;margin-left:4px}
 
-/* ── NAV ── */
-.nav{
-  height:60px;
-  border-bottom:1px solid var(--border);
-  display:flex;align-items:center;justify-content:space-between;
-  padding:0 48px;
-  position:sticky;top:0;
-  background:rgba(242,237,228,0.94);
-  backdrop-filter:blur(16px);
-  z-index:100;
-}
-.logo{
-  font-family:'Instrument Serif',serif;
-  font-size:21px;color:var(--ink);letter-spacing:-0.3px;
-}
-.logo b{color:var(--blue);font-weight:400}
-.nav-right{display:flex;align-items:center;gap:8px}
-.npill{
-  font-size:11.5px;font-weight:500;color:var(--sub);
-  padding:4px 12px;
-  border:1px solid var(--border);
-  border-radius:20px;
-  background:transparent;
-}
-.npill-blue{
-  background:var(--blue);color:#fff;
-  border-color:var(--blue);
-  font-weight:600;
-}
+/* NAV */
+.nav{height:64px;border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;padding:0 48px;position:sticky;top:0;background:rgba(247,244,239,0.96);backdrop-filter:blur(20px);z-index:100}
+.logo{font-family:'Fraunces',serif;font-size:22px;color:var(--ink);letter-spacing:-0.5px;display:flex;align-items:center;gap:8px;cursor:default}
+.logo-dot{width:8px;height:8px;border-radius:50%;background:var(--blue);flex-shrink:0}
+.nav-right{display:flex;align-items:center;gap:10px}
+.npill{font-size:12px;font-weight:600;color:var(--sub);padding:6px 14px;border:1px solid var(--border);border-radius:20px;background:var(--card)}
+.npill-cta{background:var(--blue);color:#fff;border-color:var(--blue);cursor:pointer;transition:all .15s}
+.npill-cta:hover{background:var(--blue-dk);transform:translateY(-1px)}
 
-/* ── HERO ── */
-.hero{
-  padding:80px 48px 72px;
-  border-bottom:1px solid var(--border);
-  overflow:hidden;
-}
-.hero-inner{
-  max-width:1060px;margin:0 auto;
-  display:grid;grid-template-columns:1fr 390px;
-  gap:64px;align-items:center;
-}
-
-/* Decorative gradient mesh behind hero — strong, atmospheric */
-.hero::after{
-  content:'';
-  position:absolute;
-  top:-120px;right:calc(50% - 820px);
-  width:700px;height:700px;
-  border-radius:50%;
-  background:radial-gradient(circle, rgba(26,79,255,0.10) 0%, rgba(26,79,255,0.04) 40%, transparent 70%);
-  pointer-events:none;z-index:0;
-}
-/* Secondary warm glow bottom-left */
-.hero::before{
-  content:'';
-  position:absolute;
-  bottom:-60px;left:-80px;
-  width:500px;height:400px;
-  border-radius:50%;
-  background:radial-gradient(circle, rgba(232,160,32,0.08) 0%, transparent 65%);
-  pointer-events:none;z-index:0;
-}
-
-.hero-eye{display:flex;align-items:center;gap:7px;margin-bottom:20px}
-.eye-dot{
-  width:6px;height:6px;border-radius:50%;
-  background:var(--amber);
-}
-.eye-txt{
-  font-size:11px;font-weight:600;
-  color:var(--amber);
-  letter-spacing:.12em;text-transform:uppercase;
-}
-.hero h1{
-  font-family:'Instrument Serif',serif;
-  font-size:clamp(36px,4vw,58px);
-  line-height:1.08;
-  letter-spacing:-0.8px;
-  color:var(--ink);
-  margin-bottom:18px;
-}
+/* HERO */
+.hero{padding:96px 48px 80px;border-bottom:1px solid var(--border);text-align:center;overflow:hidden}
+.hero::after{content:'';position:absolute;top:-200px;left:50%;transform:translateX(-50%);width:900px;height:600px;border-radius:50%;background:radial-gradient(ellipse,rgba(24,71,240,0.09) 0%,transparent 70%);pointer-events:none;z-index:0}
+.hero-eyebrow{display:inline-flex;align-items:center;gap:8px;background:var(--blue-lt);border:1px solid rgba(24,71,240,0.15);border-radius:20px;padding:6px 14px;margin-bottom:28px}
+.hero-eyebrow-dot{width:6px;height:6px;border-radius:50%;background:var(--blue);animation:pulse 2s infinite}
+@keyframes pulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.5;transform:scale(1.3)}}
+.hero-eyebrow-txt{font-size:12px;font-weight:600;color:var(--blue);letter-spacing:.04em}
+.hero h1{font-family:'Fraunces',serif;font-size:clamp(40px,5.5vw,72px);line-height:1.04;letter-spacing:-1.5px;color:var(--ink);margin-bottom:22px;max-width:840px;margin-left:auto;margin-right:auto}
 .hero h1 em{color:var(--blue);font-style:italic}
-.hero-sub{
-  font-size:16px;color:var(--sub);
-  line-height:1.78;margin-bottom:32px;
-  font-weight:400;max-width:480px;
-}
-.hero-nums{display:flex;gap:32px;flex-wrap:wrap}
-.hnum{display:flex;flex-direction:column;gap:2px}
-.hnum-val{
-  font-family:'Instrument Serif',serif;
-  font-size:26px;color:var(--ink);line-height:1;
-}
-.hnum-lbl{font-size:11.5px;color:var(--muted);font-weight:500}
+.underline-wrap{position:relative;display:inline-block}
+.underline-wrap::after{content:'';position:absolute;left:0;bottom:-4px;width:100%;height:3px;background:var(--amber);border-radius:2px}
+.hero-sub{font-size:18px;color:var(--sub);line-height:1.7;max-width:560px;margin:0 auto 40px;font-weight:400}
+.hero-cta-row{display:flex;align-items:center;justify-content:center;gap:12px;margin-bottom:52px;flex-wrap:wrap}
+.btn-hero{display:inline-flex;align-items:center;gap:8px;padding:14px 28px;border-radius:10px;font-family:'Plus Jakarta Sans',sans-serif;font-size:15px;font-weight:700;cursor:pointer;border:none;text-decoration:none;white-space:nowrap;transition:all .18s}
+.btn-hero-primary{background:var(--blue);color:#fff;box-shadow:0 2px 0 var(--blue-dk),0 8px 24px rgba(24,71,240,0.25)}
+.btn-hero-primary:hover{background:var(--blue-dk);box-shadow:0 2px 0 #0c2a8a,0 12px 32px rgba(24,71,240,0.3);transform:translateY(-2px)}
+.btn-hero-ghost{background:var(--card);color:var(--ink);border:1.5px solid var(--border)}
+.btn-hero-ghost:hover{border-color:var(--sub);background:var(--section)}
+.hero-trust{display:flex;align-items:center;justify-content:center;gap:20px;flex-wrap:wrap}
+.htrust-item{display:flex;align-items:center;gap:6px;font-size:13px;color:var(--muted);font-weight:500}
+.htrust-sep{width:1px;height:14px;background:var(--border);flex-shrink:0}
 
-/* ── HERO CARD ── */
-.hero-card{
-  background:var(--card);
-  border:1px solid var(--border);
-  border-radius:16px;
-  overflow:hidden;
-  box-shadow:0 1px 3px rgba(23,18,14,.05), 0 12px 40px rgba(23,18,14,.08), 0 0 0 1px rgba(23,18,14,.04);
-}
-.hc-top{background:var(--blue);padding:22px 24px 18px}
-.hc-name{font-family:'Instrument Serif',serif;font-size:22px;color:#fff;margin-bottom:2px}
-.hc-tag{font-size:11.5px;color:rgba(255,255,255,.55)}
-.hc-stat{
-  display:inline-block;
-  background:var(--amber);color:var(--ink);
-  font-size:17px;font-weight:700;
-  font-family:'Instrument Serif',serif;
-  padding:5px 13px;border-radius:6px;margin-top:13px;
-}
-.hc-body{padding:14px 24px 18px}
-.hc-row{
-  display:flex;align-items:flex-start;gap:8px;
-  padding:9px 0;border-bottom:1px solid var(--border-lt);
-  font-size:12.5px;color:var(--sub);line-height:1.4;
-}
-.hc-row:last-child{border:none}
-.hc-dot{width:4px;height:4px;border-radius:50%;background:var(--blue);margin-top:5px;flex-shrink:0}
+/* STATS STRIP */
+.stats-strip{background:var(--ink);padding:40px 48px}
+.stats-inner{max-width:1060px;margin:0 auto;display:grid;grid-template-columns:repeat(4,1fr);text-align:center}
+.stat-item{padding:0 24px;border-right:1px solid rgba(255,255,255,0.1)}
+.stat-item:last-child{border:none}
+.stat-val{font-family:'Fraunces',serif;font-size:44px;font-weight:600;color:#fff;letter-spacing:-1px;line-height:1;margin-bottom:6px;display:block}
+.stat-val em{color:var(--amber);font-style:normal}
+.stat-lbl{font-size:12.5px;color:rgba(255,255,255,0.4);font-weight:500}
 
-/* ── TRUST STRIP ── (YC-style social proof bar) */
-.trust-strip{
-  background:var(--section);
-  border-bottom:1px solid var(--border);
-  padding:14px 48px;
-}
-.trust-inner{
-  max-width:1060px;margin:0 auto;
-  display:flex;align-items:center;gap:28px;
-  flex-wrap:wrap;
-}
-.trust-label{
-  font-size:11px;font-weight:600;
-  color:var(--muted);letter-spacing:.1em;text-transform:uppercase;
-  flex-shrink:0;
-}
-.trust-sep{width:1px;height:16px;background:var(--border);flex-shrink:0}
-.trust-items{display:flex;align-items:center;gap:24px;flex-wrap:wrap}
-.trust-item{
-  display:flex;align-items:center;gap:6px;
-  font-size:12.5px;color:var(--sub);font-weight:500;
-}
-.trust-icon{font-size:14px}
+/* HOW IT WORKS */
+.how-section{padding:80px 48px;border-bottom:1px solid var(--border);background:var(--white)}
+.how-inner{max-width:1060px;margin:0 auto}
+.how-header{margin-bottom:56px}
+.section-eyebrow{font-size:11px;font-weight:700;color:var(--blue);letter-spacing:.12em;text-transform:uppercase;margin-bottom:12px}
+.section-title{font-family:'Fraunces',serif;font-size:clamp(28px,3vw,42px);letter-spacing:-0.8px;color:var(--ink);margin-bottom:14px;line-height:1.1}
+.section-sub{font-size:16px;color:var(--sub);max-width:500px;line-height:1.65}
+.how-steps{display:grid;grid-template-columns:repeat(3,1fr);gap:40px;position:relative}
+.how-steps::before{content:'';position:absolute;top:52px;left:calc(16.66% + 20px);width:calc(66.66% - 40px);height:1px;background:repeating-linear-gradient(90deg,var(--border) 0,var(--border) 8px,transparent 8px,transparent 16px);z-index:0}
+.how-step{text-align:center;padding:0 12px}
+.how-step-num{width:52px;height:52px;border-radius:50%;background:var(--blue);color:#fff;font-family:'Fraunces',serif;font-size:20px;font-weight:600;display:inline-flex;align-items:center;justify-content:center;margin-bottom:20px;box-shadow:0 0 0 8px var(--blue-lt);position:relative;z-index:1}
+.how-step-title{font-size:16px;font-weight:700;color:var(--ink);margin-bottom:8px}
+.how-step-desc{font-size:14px;color:var(--sub);line-height:1.6}
 
-/* ── HOW IT WORKS — YC-style 3-step ── */
-.how-section{
-  background:var(--page);
-  border-bottom:1px solid var(--border);
-  padding:36px 48px;
-}
-.how-inner{
-  max-width:1060px;margin:0 auto;
-  display:flex;align-items:center;gap:20px;flex-wrap:wrap;
-}
-.how-label{
-  font-size:11px;font-weight:700;
-  color:var(--muted);letter-spacing:.12em;text-transform:uppercase;
-  white-space:nowrap;margin-right:8px;
-}
-.how-steps{
-  display:flex;align-items:center;gap:14px;flex:1;flex-wrap:wrap;
-}
-.how-step{
-  display:flex;align-items:flex-start;gap:12px;flex:1;min-width:200px;
-}
-.how-num{
-  font-family:'Instrument Serif',serif;
-  font-size:32px;line-height:1;color:var(--blue);
-  opacity:0.35;flex-shrink:0;padding-top:2px;
-}
-.how-title{font-size:13.5px;font-weight:600;color:var(--ink);margin-bottom:3px;}
-.how-desc{font-size:12px;color:var(--sub);line-height:1.55;}
-.how-arrow{
-  font-size:20px;color:var(--border);font-weight:300;
-  flex-shrink:0;margin-top:8px;
-}
+/* FEATURES */
+.features-section{padding:80px 48px;border-bottom:1px solid var(--border);background:var(--page)}
+.features-inner{max-width:1060px;margin:0 auto}
+.features-header{margin-bottom:48px}
+.feat-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+.feat-card{background:var(--card);border:1px solid var(--border);border-radius:14px;padding:28px 26px;transition:all .2s}
+.feat-card:hover{border-color:var(--blue);box-shadow:0 8px 32px rgba(24,71,240,0.09);transform:translateY(-3px)}
+.feat-icon{width:46px;height:46px;border-radius:10px;background:var(--blue-lt);display:flex;align-items:center;justify-content:center;font-size:22px;margin-bottom:16px}
+.feat-title{font-size:16px;font-weight:700;color:var(--ink);margin-bottom:8px}
+.feat-desc{font-size:13.5px;color:var(--sub);line-height:1.6}
 
-/* ── STEPS BAR ── */
-.steps-bar{
-  background:var(--card);
-  border-bottom:1px solid var(--border);
-  padding:0 48px;
-}
-.steps-inner{
-  max-width:1060px;margin:0 auto;
-  display:flex;align-items:center;
-  height:52px;gap:0;
-}
+/* TESTIMONIALS */
+.testimonials-section{padding:80px 48px;background:var(--ink)}
+.testimonials-inner{max-width:1060px;margin:0 auto}
+.testimonials-header{margin-bottom:48px}
+.testimonials-header .section-title{color:#fff}
+.testimonials-header .section-eyebrow{color:var(--amber)}
+.testimonials-header .section-sub{color:rgba(255,255,255,0.4)}
+.testi-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+.testi-card{background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.08);border-radius:14px;padding:28px 26px;display:flex;flex-direction:column;gap:16px}
+.testi-quote{font-family:'Fraunces',serif;font-size:15.5px;color:rgba(255,255,255,0.82);line-height:1.65;font-style:italic;flex:1}
+.testi-quote::before{content:'\201C';color:var(--amber);font-size:24px;line-height:0;vertical-align:-8px;margin-right:2px}
+.testi-footer{display:flex;align-items:center;gap:12px}
+.testi-avatar{width:40px;height:40px;border-radius:50%;background:var(--blue);display:flex;align-items:center;justify-content:center;font-size:15px;font-weight:700;color:#fff;flex-shrink:0;font-family:'Fraunces',serif}
+.testi-name{font-size:13px;font-weight:700;color:#fff}
+.testi-role{font-size:11.5px;color:rgba(255,255,255,0.35);margin-top:1px}
+.testi-raised{font-size:10px;font-weight:700;color:var(--amber);background:rgba(245,158,11,0.12);border:1px solid rgba(245,158,11,0.2);padding:2px 8px;border-radius:20px;white-space:nowrap;margin-left:auto}
+
+/* PRICING */
+.pricing-section{padding:80px 48px;background:var(--white);border-bottom:1px solid var(--border);text-align:center}
+.pricing-inner{max-width:520px;margin:0 auto}
+.pricing-card{background:var(--card);border:1.5px solid var(--border);border-radius:20px;padding:40px 44px;margin-top:40px;position:relative;overflow:hidden}
+.pricing-card::before{content:'';position:absolute;top:0;left:0;right:0;height:4px;background:linear-gradient(90deg,var(--blue),var(--amber))}
+.pricing-badge{display:inline-block;background:var(--blue-lt);color:var(--blue);font-size:11px;font-weight:700;padding:4px 12px;border-radius:20px;letter-spacing:.05em;text-transform:uppercase;margin-bottom:16px}
+.pricing-amount{font-family:'Fraunces',serif;font-size:64px;font-weight:600;color:var(--ink);letter-spacing:-2px;line-height:1;margin-bottom:4px}
+.pricing-amount sup{font-size:24px;vertical-align:top;margin-top:12px;display:inline-block}
+.pricing-once{font-size:13px;color:var(--muted);margin-bottom:28px}
+.pricing-feats{list-style:none;text-align:left;display:flex;flex-direction:column;gap:12px;margin-bottom:28px}
+.pricing-feat{display:flex;align-items:center;gap:10px;font-size:14px;color:var(--sub)}
+.pfeat-chk{width:22px;height:22px;border-radius:50%;background:#DCFCE7;color:var(--green);display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:700;flex-shrink:0}
+.pricing-divider{border:none;border-top:1px solid var(--border-lt);margin:20px 0}
+
+/* STEPS BAR */
+.steps-bar{background:var(--card);border-bottom:1px solid var(--border);padding:0 48px}
+.steps-inner{max-width:1060px;margin:0 auto;display:flex;align-items:center;height:52px;gap:0}
 .st{display:flex;align-items:center;gap:9px;padding-right:26px;margin-right:10px;position:relative}
 .st:not(:last-child)::after{content:'›';position:absolute;right:2px;color:var(--border);font-size:18px}
-.st-num{
-  width:22px;height:22px;border-radius:50%;
-  border:1.5px solid var(--border);
-  display:flex;align-items:center;justify-content:center;
-  font-size:11px;font-weight:600;color:var(--muted);
-  flex-shrink:0;transition:all .2s;
-}
+.st-num{width:22px;height:22px;border-radius:50%;border:1.5px solid var(--border);display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:600;color:var(--muted);flex-shrink:0;transition:all .2s}
 .st-num.active{background:var(--blue);border-color:var(--blue);color:#fff}
 .st-num.done{background:var(--green);border-color:var(--green);color:#fff}
 .st-lbl{font-size:13px;color:var(--muted);font-weight:500;white-space:nowrap}
 .st-lbl.active{color:var(--ink);font-weight:600}
 
-/* ── MAIN ── */
+/* MAIN */
 .main{max-width:1060px;margin:0 auto;padding:48px 48px 96px}
 .panel{display:none}.panel.active{display:block}
+#panel1.active,#panel2.active,#panel3.active,#panel4.active{background:var(--card);border:1px solid var(--border-lt);border-radius:16px;padding:40px 44px;box-shadow:0 1px 3px rgba(15,13,10,.05),0 8px 32px rgba(15,13,10,.04)}
 
-/* Form panel gets a slightly elevated card background */
-#panel1.active, #panel2.active, #panel3.active, #panel4.active{
-  background:var(--card);
-  border:1px solid var(--border-lt);
-  border-radius:16px;
-  padding:40px 44px;
-  box-shadow:0 1px 3px rgba(23,18,14,0.06), 0 8px 32px rgba(23,18,14,0.04);
-}
-
-/* ── FORM ── */
+/* FORM */
 .form-hd{margin-bottom:32px}
-.form-hd h2{
-  font-family:'Instrument Serif',serif;
-  font-size:28px;color:var(--ink);letter-spacing:-.3px;margin-bottom:4px;
-}
+.form-hd h2{font-family:'Fraunces',serif;font-size:28px;color:var(--ink);letter-spacing:-.5px;margin-bottom:4px}
 .form-hd p{font-size:14px;color:var(--sub)}
-
 .fsec{margin-bottom:36px}
-.fsec-lbl{
-  font-size:11px;font-weight:700;
-  color:var(--blue);letter-spacing:.1em;text-transform:uppercase;
-  margin-bottom:16px;padding-bottom:9px;
-  border-bottom:2px solid var(--blue-lt);
-}
+.fsec-lbl{font-size:11px;font-weight:700;color:var(--blue);letter-spacing:.1em;text-transform:uppercase;margin-bottom:16px;padding-bottom:9px;border-bottom:2px solid var(--blue-lt)}
 .fgrid{display:grid;grid-template-columns:1fr 1fr;gap:18px}
 .fg{display:flex;flex-direction:column;gap:6px}
 .fg.full{grid-column:1/-1}
-label{font-size:13px;font-weight:500;color:var(--ink)}
+label{font-size:13px;font-weight:600;color:var(--ink)}
 .req{color:var(--red)}.hint{color:var(--muted);font-weight:400;font-size:12px}
-
-input,textarea,select{
-  font-family:'DM Sans',sans-serif;
-  font-size:14px;padding:10px 13px;
-  background:var(--card);
-  border:1.5px solid var(--border);
-  border-radius:8px;
-  color:var(--ink);
-  outline:none;
-  transition:border-color .15s,box-shadow .15s;
-  width:100%;resize:vertical;
-}
-input:focus,textarea:focus,select:focus{
-  border-color:var(--blue);
-  box-shadow:0 0 0 3px rgba(26,79,255,.08);
-  background:var(--white);
-}
+input,textarea,select{font-family:'Plus Jakarta Sans',sans-serif;font-size:14px;padding:10px 13px;background:var(--white);border:1.5px solid var(--border);border-radius:8px;color:var(--ink);outline:none;transition:border-color .15s,box-shadow .15s;width:100%;resize:vertical}
+input:focus,textarea:focus,select:focus{border-color:var(--blue);box-shadow:0 0 0 3px rgba(24,71,240,.08)}
 input::placeholder,textarea::placeholder{color:var(--muted)}
-select{
-  appearance:none;
-  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='11' height='7'%3E%3Cpath d='M1 1l4.5 4.5L10 1' stroke='%236B6258' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");
-  background-repeat:no-repeat;background-position:right 13px center;
-  padding-right:34px;
-}
+select{appearance:none;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='11' height='7'%3E%3Cpath d='M1 1l4.5 4.5L10 1' stroke='%236B6258' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 13px center;padding-right:34px}
 hr.div{border:none;border-top:1px solid var(--border-lt);margin:28px 0}
-
-/* Theme picker */
-.theme-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:10px}
 .theme-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:12px;margin-top:4px}
-.theme-opt{
-  border:2px solid var(--border);border-radius:10px;overflow:hidden;
-  cursor:pointer;transition:all .18s;aspect-ratio:16/9;
-  display:flex;flex-direction:column;
-  position:relative;
-}
-.theme-opt:hover{border-color:var(--blue);transform:translateY(-3px);box-shadow:0 6px 18px rgba(26,79,255,.15)}
-.theme-opt.selected{border-color:var(--blue);box-shadow:0 0 0 3px rgba(26,79,255,.18),0 6px 18px rgba(26,79,255,.15)}
+.theme-opt{border:2px solid var(--border);border-radius:10px;overflow:hidden;cursor:pointer;transition:all .18s;aspect-ratio:16/9;display:flex;flex-direction:column;position:relative}
+.theme-opt:hover{border-color:var(--blue);transform:translateY(-3px);box-shadow:0 6px 18px rgba(24,71,240,.15)}
+.theme-opt.selected{border-color:var(--blue);box-shadow:0 0 0 3px rgba(24,71,240,.18)}
 .theme-opt.selected::after{content:'✓';position:absolute;top:4px;right:6px;font-size:9px;font-weight:700;color:#fff;background:var(--blue);width:16px;height:16px;border-radius:50%;display:flex;align-items:center;justify-content:center;line-height:1}
 .theme-canvas{width:100%;display:block;flex:1;min-height:0}
 .theme-lbl{font-size:9.5px;font-weight:600;text-align:center;padding:4px 2px;background:var(--section);color:var(--sub);border-top:1px solid var(--border-lt);flex-shrink:0}
-
-/* Buttons */
-.btn{
-  display:inline-flex;align-items:center;gap:8px;
-  padding:11px 22px;border-radius:8px;
-  font-family:'DM Sans',sans-serif;font-size:14px;font-weight:600;
-  cursor:pointer;border:none;transition:all .15s;
-  text-decoration:none;white-space:nowrap;
-}
-.btn-primary{background:var(--blue);color:#fff}
-.btn-primary:hover{background:var(--blue-dk);box-shadow:0 4px 14px rgba(26,79,255,.28);transform:translateY(-1px)}
-.btn-primary:disabled{opacity:.5;cursor:not-allowed;transform:none;box-shadow:none}
+.btn{display:inline-flex;align-items:center;gap:8px;padding:11px 22px;border-radius:8px;font-family:'Plus Jakarta Sans',sans-serif;font-size:14px;font-weight:600;cursor:pointer;border:none;transition:all .15s;text-decoration:none;white-space:nowrap}
+.btn-primary{background:var(--blue);color:#fff;box-shadow:0 1px 0 var(--blue-dk)}
+.btn-primary:hover{background:var(--blue-dk);box-shadow:0 4px 14px rgba(24,71,240,.28);transform:translateY(-1px)}
 .btn-ghost{background:transparent;color:var(--ink);border:1.5px solid var(--border)}
 .btn-ghost:hover{border-color:var(--sub);background:var(--section)}
 .btn-row{display:flex;gap:10px;align-items:center;justify-content:flex-end;margin-top:28px}
+.err-box{display:none;background:#fef2f2;border:1.5px solid #fecaca;border-radius:7px;padding:11px 15px;color:var(--red);font-size:13px;margin-top:12px}
 
-.err-box{
-  display:none;background:#fef2f2;border:1.5px solid #fecaca;
-  border-radius:7px;padding:11px 15px;color:var(--red);
-  font-size:13px;margin-top:12px;
-}
-
-/* ── PAYMENT ── */
+/* PAYMENT */
 .pay-wrap{max-width:520px;margin:0 auto}
 .pay-hd{margin-bottom:28px}
-.pay-hd h2{font-family:'Instrument Serif',serif;font-size:28px;color:var(--ink);letter-spacing:-.3px;margin-bottom:4px}
+.pay-hd h2{font-family:'Fraunces',serif;font-size:28px;color:var(--ink);letter-spacing:-.3px;margin-bottom:4px}
 .pay-hd p{font-size:14px;color:var(--sub)}
-.pay-price-box{
-  background:var(--card);
-  border:1px solid var(--border);
-  border-radius:12px;padding:22px 26px;margin-bottom:20px;
-  display:flex;align-items:center;justify-content:space-between;
-}
-.pay-price{font-family:'Instrument Serif',serif;font-size:46px;color:var(--ink);line-height:1}
+.pay-price-box{background:var(--page);border:1.5px solid var(--border);border-radius:14px;padding:22px 26px;margin-bottom:20px;display:flex;align-items:center;justify-content:space-between}
+.pay-price{font-family:'Fraunces',serif;font-size:48px;color:var(--ink);line-height:1}
 .pay-price-sub{font-size:13px;color:var(--muted);margin-top:3px}
-.pay-once{
-  background:#dcfce7;color:var(--green);
-  font-size:12px;font-weight:600;padding:6px 14px;border-radius:20px;
-}
+.pay-once{background:#DCFCE7;color:var(--green);font-size:12px;font-weight:700;padding:6px 14px;border-radius:20px}
 .pay-feats{display:flex;flex-direction:column;gap:10px;margin-bottom:20px}
 .pay-feat{display:flex;align-items:center;gap:11px;font-size:14px;color:var(--ink)}
-.feat-chk{
-  width:20px;height:20px;border-radius:50%;
-  background:#dcfce7;color:var(--green);
-  display:flex;align-items:center;justify-content:center;
-  font-size:11px;font-weight:700;flex-shrink:0;
-}
+.feat-chk{width:20px;height:20px;border-radius:50%;background:#DCFCE7;color:var(--green);display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;flex-shrink:0}
 .pay-methods{border-top:1px solid var(--border-lt);padding-top:16px;margin-bottom:20px}
 .pay-method-lbl{font-size:11px;color:var(--muted);font-weight:600;text-transform:uppercase;letter-spacing:.07em;margin-bottom:9px}
 .method-badges{display:flex;gap:6px;flex-wrap:wrap}
 .mbadge{padding:4px 9px;border:1px solid var(--border);border-radius:4px;font-size:11px;font-weight:600;color:var(--sub);background:var(--card)}
-.test-box{
-  display:none;background:#fffbeb;border:1.5px dashed #fbbf24;
-  border-radius:9px;padding:16px 20px;margin-bottom:16px;text-align:center;
-}
-.test-lbl{font-size:11px;font-weight:700;color:#92400e;text-transform:uppercase;letter-spacing:.1em;margin-bottom:5px}
-.test-desc{font-size:12px;color:#78350f;margin-bottom:11px}
+.test-box{display:none;background:#FFFBEB;border:1.5px dashed #FCD34D;border-radius:9px;padding:16px 20px;margin-bottom:16px;text-align:center}
+.test-lbl{font-size:11px;font-weight:700;color:#92400E;text-transform:uppercase;letter-spacing:.1em;margin-bottom:5px}
+.test-desc{font-size:12px;color:#78350F;margin-bottom:11px}
 
-/* ── GENERATING ── */
-.gen-wrap{
-  max-width:500px;margin:0 auto;
-  background:var(--card);border:1px solid var(--border);
-  border-radius:14px;padding:48px 44px;text-align:center;
-}
-.gen-spinner{
-  width:42px;height:42px;
-  border:3px solid var(--border-lt);border-top-color:var(--blue);
-  border-radius:50%;animation:spin .85s linear infinite;
-  margin:0 auto 24px;
-}
+/* GENERATING */
+.gen-wrap{max-width:500px;margin:0 auto;background:var(--card);border:1px solid var(--border);border-radius:14px;padding:48px 44px;text-align:center}
+.gen-spinner{width:44px;height:44px;border:3px solid var(--border-lt);border-top-color:var(--blue);border-radius:50%;animation:spin .85s linear infinite;margin:0 auto 24px}
 @keyframes spin{to{transform:rotate(360deg)}}
-.gen-title{font-family:'Instrument Serif',serif;font-size:24px;color:var(--ink);margin-bottom:5px}
+.gen-title{font-family:'Fraunces',serif;font-size:24px;color:var(--ink);margin-bottom:5px}
 .gen-sub{font-size:13px;color:var(--sub);margin-bottom:26px}
 .prog-list{display:flex;flex-direction:column;gap:8px;text-align:left}
-.ps{
-  display:flex;align-items:center;gap:11px;padding:10px 13px;
-  border-radius:8px;background:var(--section);border:1px solid var(--border-lt);
-  font-size:13px;color:var(--sub);transition:all .3s;
-}
+.ps{display:flex;align-items:center;gap:11px;padding:10px 13px;border-radius:8px;background:var(--section);border:1px solid var(--border-lt);font-size:13px;color:var(--sub);transition:all .3s}
 .ps.active{border-color:var(--blue);background:var(--blue-lt);color:var(--blue);font-weight:600}
-.ps.done{border-color:#bbf7d0;background:#f0fdf4;color:var(--green)}
-.ps-icon{
-  width:20px;height:20px;border-radius:50%;border:1.5px solid var(--border);
-  display:flex;align-items:center;justify-content:center;font-size:10px;flex-shrink:0;
-}
+.ps.done{border-color:#BBF7D0;background:#F0FDF4;color:var(--green)}
+.ps-icon{width:20px;height:20px;border-radius:50%;border:1.5px solid var(--border);display:flex;align-items:center;justify-content:center;font-size:10px;flex-shrink:0}
 .ps.active .ps-icon{border-color:var(--blue);background:var(--blue);color:#fff}
 .ps.done .ps-icon{border-color:var(--green);background:var(--green);color:#fff}
 .gen-err{background:#fef2f2;border:1px solid #fecaca;border-radius:7px;padding:11px 15px;color:var(--red);font-size:13px;margin-top:14px;display:none}
 
-/* ── RESULT ── */
-.result-banner{
-  background:#f0fdf4;border:1px solid #bbf7d0;border-radius:12px;
-  padding:20px 26px;display:flex;align-items:center;gap:14px;margin-bottom:26px;
-}
-.result-icon{
-  width:40px;height:40px;border-radius:50%;
-  background:var(--green);color:#fff;
-  display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0;
-}
-.result-title{font-family:'Instrument Serif',serif;font-size:21px;color:var(--ink)}
+/* RESULT */
+.result-banner{background:#F0FDF4;border:1px solid #BBF7D0;border-radius:12px;padding:20px 26px;display:flex;align-items:center;gap:14px;margin-bottom:26px}
+.result-icon{width:40px;height:40px;border-radius:50%;background:var(--green);color:#fff;display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0}
+.result-title{font-family:'Fraunces',serif;font-size:21px;color:var(--ink)}
 .result-sub{font-size:13px;color:var(--sub);margin-top:1px}
 .dl-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-bottom:22px}
-.dl-card{
-  background:var(--card);border:1.5px solid var(--border);border-radius:11px;
-  padding:20px 16px;display:flex;flex-direction:column;align-items:center;gap:8px;
-  transition:all .15s;text-align:center;
-}
-.dl-card:hover{border-color:var(--blue);box-shadow:0 4px 16px rgba(26,79,255,.1);transform:translateY(-2px)}
+.dl-card{background:var(--card);border:1.5px solid var(--border);border-radius:11px;padding:20px 16px;display:flex;flex-direction:column;align-items:center;gap:8px;transition:all .15s;text-align:center}
+.dl-card:hover{border-color:var(--blue);box-shadow:0 4px 16px rgba(24,71,240,.1);transform:translateY(-2px)}
 .dl-icon{width:44px;height:44px;border-radius:9px;display:flex;align-items:center;justify-content:center;font-size:21px}
 .dl-name{font-size:14px;font-weight:600;color:var(--ink)}
 .dl-ext{font-size:12px;color:var(--muted)}
-.dl-btn{
-  width:100%;padding:9px 0;border-radius:6px;
-  border:1.5px solid var(--border);background:transparent;
-  font-size:13px;font-weight:600;cursor:pointer;color:var(--ink);
-  transition:all .15s;font-family:'DM Sans',sans-serif;
-}
+.dl-btn{width:100%;padding:9px 0;border-radius:6px;border:1.5px solid var(--border);background:transparent;font-size:13px;font-weight:600;cursor:pointer;color:var(--ink);transition:all .15s;font-family:'Plus Jakarta Sans',sans-serif}
 .dl-btn:hover{background:var(--blue);border-color:var(--blue);color:#fff}
-.slides-preview{
-  background:var(--section);border:1px solid var(--border-lt);
-  border-radius:11px;padding:18px 22px;
-}
-.slides-preview h3{
-  font-size:11px;font-weight:700;color:var(--muted);
-  text-transform:uppercase;letter-spacing:.08em;margin-bottom:14px;
-}
+.slides-preview{background:var(--section);border:1px solid var(--border-lt);border-radius:11px;padding:18px 22px}
+.slides-preview h3{font-size:11px;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:.08em;margin-bottom:14px}
 .slides-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(145px,1fr));gap:8px}
-.slide-thumb{
-  background:var(--card);border:1px solid var(--border-lt);
-  border-radius:6px;padding:9px 11px;
-}
+.slide-thumb{background:var(--card);border:1px solid var(--border-lt);border-radius:6px;padding:9px 11px}
 .sn{font-size:10px;color:var(--muted);margin-bottom:2px;font-weight:600}
 .st2{font-size:12px;font-weight:600;color:var(--ink);margin-bottom:2px;line-height:1.3}
 .sb{font-size:10px;color:var(--sub);line-height:1.4}
 
-/* ── FOOTER ── */
-.site-footer{
-  background:var(--section);
-  border-top:1px solid var(--border);
-  padding:28px 48px;
-  margin-top:0;
-}
-.footer-inner{
-  max-width:1060px;margin:0 auto;
-  display:flex;align-items:center;justify-content:space-between;
-  flex-wrap:wrap;gap:12px;
-}
-.footer-logo{font-family:'Instrument Serif',serif;font-size:18px;color:var(--ink)}
-.footer-logo b{color:var(--blue);font-weight:400}
-.footer-links{display:flex;gap:20px}
-.footer-link{font-size:12.5px;color:var(--muted);text-decoration:none;font-weight:500}
-.footer-link:hover{color:var(--ink)}
-.footer-note{font-size:12px;color:var(--muted)}
+/* FOOTER */
+.site-footer{background:var(--ink);padding:52px 48px 32px}
+.footer-inner{max-width:1060px;margin:0 auto}
+.footer-top{display:grid;grid-template-columns:1.5fr 1fr 1fr;gap:48px;padding-bottom:36px;border-bottom:1px solid rgba(255,255,255,0.08)}
+.footer-logo{font-family:'Fraunces',serif;font-size:22px;color:#fff;letter-spacing:-.5px;display:flex;align-items:center;gap:8px;margin-bottom:12px}
+.footer-logo-dot{width:8px;height:8px;border-radius:50%;background:var(--blue);flex-shrink:0}
+.footer-tagline{font-size:13px;color:rgba(255,255,255,0.3);line-height:1.65;max-width:240px}
+.footer-col-title{font-size:11px;font-weight:700;color:rgba(255,255,255,0.3);letter-spacing:.1em;text-transform:uppercase;margin-bottom:14px}
+.footer-links{display:flex;flex-direction:column;gap:9px}
+.footer-link{font-size:13.5px;color:rgba(255,255,255,0.5);text-decoration:none;transition:color .15s}
+.footer-link:hover{color:#fff}
+.footer-bottom{padding-top:24px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:10px}
+.footer-copy{font-size:12px;color:rgba(255,255,255,0.22)}
+.footer-powered{font-size:12px;color:rgba(255,255,255,0.22)}
+.footer-powered span{color:rgba(255,255,255,0.45)}
 
+/* RESPONSIVE */
 @media(max-width:768px){
-  .announce-bar{font-size:11px;padding:8px 20px}
-  .nav,.hero,.trust-strip,.steps-bar,.how-section,.site-footer{padding-left:20px;padding-right:20px}
-  .hero-inner{grid-template-columns:1fr;gap:28px}.hero-card{display:none}
+  .announce-bar,.nav,.hero,.stats-strip,.how-section,.features-section,.testimonials-section,.pricing-section,.steps-bar,.site-footer{padding-left:20px;padding-right:20px}
+  .hero{padding:64px 20px 52px}
+  .hero h1{font-size:36px}
+  .hero-cta-row{flex-direction:column;align-items:stretch}
+  .btn-hero{justify-content:center}
+  .stats-inner{grid-template-columns:repeat(2,1fr);gap:28px}
+  .stat-item{border-right:none;padding:0}
+  .how-steps{grid-template-columns:1fr}
+  .how-steps::before{display:none}
+  .feat-grid{grid-template-columns:1fr}
+  .testi-grid{grid-template-columns:1fr}
+  .footer-top{grid-template-columns:1fr}
   .main{padding:24px 16px 60px}
-  #panel1.active, #panel2.active, #panel3.active, #panel4.active{padding:28px 20px;border-radius:12px}
+  #panel1.active,#panel2.active,#panel3.active,#panel4.active{padding:28px 20px;border-radius:12px}
   .fgrid{grid-template-columns:1fr}
   .dl-grid{grid-template-columns:1fr}
   .theme-grid{grid-template-columns:repeat(3,1fr)}
-  .trust-inner{gap:14px}
-  .how-steps{flex-direction:column;gap:12px}
-  .how-arrow{display:none}
+  .htrust-sep{display:none}
+  .pricing-card{padding:28px 24px}
 }
 </style>
 </head>
 <body>
 
-<!-- ANNOUNCEMENT BAR — YC-style -->
+<!-- ANNOUNCEMENT BAR -->
 <div class="announce-bar">
-  <span class="announce-dot"></span>
-  <span>Powered by DeckAi Engine AI &nbsp;·&nbsp; Instant PPTX + PDF + Word &nbsp;·&nbsp; ₹4999 one-time</span>
-  <span class="announce-arrow">→</span>
+  <span class="announce-pill">New</span>
+  <span>20-slide investor decks for Indian startups &nbsp;·&nbsp; PPTX + PDF + Word</span>
+  <span class="announce-cta">₹999 one-time →</span>
 </div>
 
 <!-- NAV -->
 <nav class="nav">
-  <div class="logo">Deck<b>AI</b></div>
+  <div class="logo"><div class="logo-dot"></div>DeckAI</div>
   <div class="nav-right">
-    <div class="npill npill-blue">AI-Powered</div>
-    <div class="npill">🇮🇳 India</div>
-    <div class="npill">Razorpay</div>
+    <div class="npill">🇮🇳 Built for India</div>
+    <div class="npill npill-cta" onclick="document.getElementById('startForm').scrollIntoView({behavior:'smooth'})">Build My Deck →</div>
   </div>
 </nav>
 
 <!-- HERO -->
 <section class="hero">
-  <div class="hero-inner">
-    <div>
-      <div class="hero-eye">
-        <div class="eye-dot"></div>
-        <div class="eye-txt">Powered by DeckAI · Payments by Razorpay</div>
-      </div>
-      <h1>Your <em>Investor-Ready</em><br>Pitch Deck in Minutes</h1>
-      <p class="hero-sub">Fill a short form. our Engine researches your market, writes a 20-slide narrative deck with real India data, and delivers a branded PPTX, Word one-pager, and PDF — instantly after payment.</p>
-      <div class="hero-nums">
-        <div class="hnum"><div class="hnum-val">20</div><div class="hnum-lbl">Narrative slides</div></div>
-        <div class="hnum"><div class="hnum-val">3</div><div class="hnum-lbl">File formats</div></div>
-        <div class="hnum"><div class="hnum-val">~40s</div><div class="hnum-lbl">Generation time</div></div>
-        <div class="hnum"><div class="hnum-val">₹4999</div><div class="hnum-lbl">One-time only</div></div>
-      </div>
+  <div class="hero-eyebrow">
+    <div class="hero-eyebrow-dot"></div>
+    <div class="hero-eyebrow-txt">AI-Powered · India-Focused · Instant Delivery</div>
+  </div>
+  <h1>Your <em>Investor-Ready</em> Pitch Deck<br>in <span class="underline-wrap">60 Seconds</span></h1>
+  <p class="hero-sub">Answer a few questions about your startup. DeckAI researches your market, writes 20 narrative slides with real India data, and delivers a branded PPTX, PDF, and Word one-pager — instantly.</p>
+  <div class="hero-cta-row">
+    <a class="btn-hero btn-hero-primary" href="#startForm" onclick="document.getElementById('startForm').scrollIntoView({behavior:'smooth'});return false">Build My Deck →</a>
+    <a class="btn-hero btn-hero-ghost" href="#how">See How It Works</a>
+  </div>
+  <div class="hero-trust">
+    <div class="htrust-item">✦ Airbnb-style narrative structure</div>
+    <div class="htrust-sep"></div>
+    <div class="htrust-item">₹ Real India 2025 market data</div>
+    <div class="htrust-sep"></div>
+    <div class="htrust-item">🔒 Payment by Razorpay</div>
+    <div class="htrust-sep"></div>
+    <div class="htrust-item">📁 PPTX · PDF · Word included</div>
+  </div>
+</section>
+
+<!-- STATS -->
+<div class="stats-strip">
+  <div class="stats-inner">
+    <div class="stat-item"><span class="stat-val"><em>20</em></span><div class="stat-lbl">Narrative slides per deck</div></div>
+    <div class="stat-item"><span class="stat-val"><em>5</em></span><div class="stat-lbl">Premium design themes</div></div>
+    <div class="stat-item"><span class="stat-val"><em>~40s</em></span><div class="stat-lbl">Average generation time</div></div>
+    <div class="stat-item"><span class="stat-val"><em>₹999</em></span><div class="stat-lbl">One-time · No subscription</div></div>
+  </div>
+</div>
+
+<!-- HOW IT WORKS -->
+<section class="how-section" id="how">
+  <div class="how-inner">
+    <div class="how-header">
+      <div class="section-eyebrow">How it works</div>
+      <div class="section-title">From idea to investor deck<br>in three steps</div>
+      <p class="section-sub">No design skills needed. No blank page anxiety. Fill the form and download your deck.</p>
     </div>
-    <div class="hero-card">
-      <div class="hc-top">
-        <div class="hc-name">QuickKart</div>
-        <div class="hc-tag">10-minute grocery for urban India</div>
-        <div class="hc-stat">₹8L MRR</div>
+    <div class="how-steps">
+      <div class="how-step">
+        <div class="how-step-num">1</div>
+        <div class="how-step-title">Describe your startup</div>
+        <div class="how-step-desc">Fill a short form about your startup — problem, solution, market, team, traction. Takes about 3 minutes. The more specific, the stronger your deck.</div>
       </div>
-      <div class="hc-body">
-        <div class="hc-row"><div class="hc-dot"></div>1,200 daily orders · 73% repeat rate in 60 days</div>
-        <div class="hc-row"><div class="hc-dot"></div>₹6.5L Cr market with no clear Tier-2 winner</div>
-        <div class="hc-row"><div class="hc-dot"></div>Seeking ₹3 Crore Seed · Series A in 18 months</div>
+      <div class="how-step">
+        <div class="how-step-num">2</div>
+        <div class="how-step-title">DeckAI builds your deck</div>
+        <div class="how-step-desc">Our AI engine researches your market, writes a 20-slide investor narrative with real India data, and formats it into a 5-act storytelling structure — in under 60 seconds.</div>
+      </div>
+      <div class="how-step">
+        <div class="how-step-num">3</div>
+        <div class="how-step-title">Download & pitch</div>
+        <div class="how-step-desc">Get a branded PPTX, PDF, and Word one-pager — all fully editable. Yours forever for a one-time ₹999 payment.</div>
       </div>
     </div>
   </div>
 </section>
 
-<!-- TRUST STRIP — YC-style social proof bar -->
-<div class="trust-strip">
-  <div class="trust-inner">
-    <div class="trust-label">Why founders choose DeckAI</div>
-    <div class="trust-sep"></div>
-    <div class="trust-items">
-      <div class="trust-item"><span class="trust-icon">✦</span>Airbnb-style narrative arc</div>
-      <div class="trust-item"><span class="trust-icon">₹</span>Real India 2025 market data</div>
-      <div class="trust-item"><span class="trust-icon">⚡</span>Ready in under 60 seconds</div>
-      <div class="trust-item"><span class="trust-icon">🔒</span>Razorpay secured · 256-bit SSL</div>
-      <div class="trust-item"><span class="trust-icon">📁</span>PPTX · DOCX · PDF included</div>
+<!-- FEATURES -->
+<section class="features-section">
+  <div class="features-inner">
+    <div class="features-header">
+      <div class="section-eyebrow">What you get</div>
+      <div class="section-title">Everything an investor<br>expects to see</div>
+    </div>
+    <div class="feat-grid">
+      <div class="feat-card"><div class="feat-icon">📊</div><div class="feat-title">20-Slide Narrative Deck</div><div class="feat-desc">5-act story structure — Problem, Revelation, Proof, Future, Ask. Each slide written with specific numbers and investor-grade claims. No filler, no fluff.</div></div>
+      <div class="feat-card"><div class="feat-icon">🇮🇳</div><div class="feat-title">India-Specific Intelligence</div><div class="feat-desc">Real 2025 data for Fintech, Healthtech, Edtech, SaaS, Agritech and more. Investor objections pre-empted. Comparable Indian funding rounds included automatically.</div></div>
+      <div class="feat-card"><div class="feat-icon">🎨</div><div class="feat-title">5 Premium Themes</div><div class="feat-desc">Midnight, Coral, Forest, Ocean, Berry — each a fully designed colour system with 8 slide layout types. Looks like a design agency built it.</div></div>
+      <div class="feat-card"><div class="feat-icon">📄</div><div class="feat-title">3 File Formats</div><div class="feat-desc">PowerPoint PPTX to present and edit. PDF to share via email. Word DOCX one-pager for the executive summary your investor reads before the meeting.</div></div>
+      <div class="feat-card"><div class="feat-icon">⚡</div><div class="feat-title">Instant Delivery</div><div class="feat-desc">Pay once, download immediately. No waiting. No account needed. No subscription. Files are yours forever — download them anytime.</div></div>
+      <div class="feat-card"><div class="feat-icon">🔐</div><div class="feat-title">Secure Payments</div><div class="feat-desc">Powered by Razorpay — India's most trusted payment gateway. UPI, GPay, PhonePe, Paytm, cards, net banking all accepted. 256-bit SSL encryption.</div></div>
     </div>
   </div>
-</div>
+</section>
 
-<!-- HOW IT WORKS — YC-style 3-step section -->
-<div class="how-section">
-  <div class="how-inner">
-    <div class="how-label">How it works</div>
-    <div class="how-steps">
-      <div class="how-step">
-        <div class="how-num">01</div>
-        <div class="how-content">
-          <div class="how-title">Fill the form</div>
-          <div class="how-desc">Describe your startup in 3 minutes. The more specific you are, the stronger your deck.</div>
+<!-- TESTIMONIALS -->
+<section class="testimonials-section">
+  <div class="testimonials-inner">
+    <div class="testimonials-header">
+      <div class="section-eyebrow">Founder stories</div>
+      <div class="section-title">Decks that opened doors</div>
+      <p class="section-sub">From first investor meetings to signed term sheets.</p>
+    </div>
+    <div class="testi-grid">
+      <div class="testi-card">
+        <div class="testi-quote">The deck DeckAI built for MediDesk was more specific than what our consultant drafted over two weeks. Every slide had real numbers. Investors kept asking how we got the market data so right.</div>
+        <div class="testi-footer">
+          <div class="testi-avatar">R</div>
+          <div><div class="testi-name">Rajesh Sharma</div><div class="testi-role">CEO · MediDesk · Healthtech</div></div>
+          <div class="testi-raised">Seed Round</div>
         </div>
       </div>
-      <div class="how-arrow">→</div>
-      <div class="how-step">
-        <div class="how-num">02</div>
-        <div class="how-content">
-          <div class="how-title">DeckEngine builds your deck</div>
-          <div class="how-desc">AI researches your market, writes 20 narrative slides with real India data — in ~40 seconds.</div>
+      <div class="testi-card">
+        <div class="testi-quote">I was pitching in 48 hours and had nothing. DeckAI built me a full 20-slide deck with our traction numbers, market sizing, and a founder story that actually resonated. The VC asked for the deck after slide 3.</div>
+        <div class="testi-footer">
+          <div class="testi-avatar">P</div>
+          <div><div class="testi-name">Priya Nair</div><div class="testi-role">Founder · AgriLink · Agritech</div></div>
+          <div class="testi-raised">₹1.2 Cr raised</div>
         </div>
       </div>
-      <div class="how-arrow">→</div>
-      <div class="how-step">
-        <div class="how-num">03</div>
-        <div class="how-content">
-          <div class="how-title">Download & pitch</div>
-          <div class="how-desc">Get investor-ready PPTX, PDF, and Word one-pager. Yours to edit and present.</div>
+      <div class="testi-card">
+        <div class="testi-quote">What surprised me was how India-specific the content was. It knew our market size, the right competitor names, the UPI infrastructure story — without me typing any of it. Saved us 3 days of research.</div>
+        <div class="testi-footer">
+          <div class="testi-avatar">A</div>
+          <div><div class="testi-name">Ankit Mehta</div><div class="testi-role">Co-Founder · FleetOS · SaaS</div></div>
+          <div class="testi-raised">Angel Round</div>
         </div>
       </div>
     </div>
   </div>
-</div>
+</section>
+
+<!-- PRICING -->
+<section class="pricing-section">
+  <div class="pricing-inner">
+    <div class="section-eyebrow">Simple pricing</div>
+    <div class="section-title">One deck. One price.<br>Zero subscriptions.</div>
+    <div class="pricing-card">
+      <div class="pricing-badge">Complete Package</div>
+      <div class="pricing-amount"><sup>₹</sup>999</div>
+      <div class="pricing-once">One-time payment · No hidden charges</div>
+      <ul class="pricing-feats">
+        <li class="pricing-feat"><div class="pfeat-chk">✓</div>20-slide PPTX Pitch Deck (fully branded)</li>
+        <li class="pricing-feat"><div class="pfeat-chk">✓</div>PDF version of complete deck</li>
+        <li class="pricing-feat"><div class="pfeat-chk">✓</div>Word DOCX Investor One-Pager</li>
+        <li class="pricing-feat"><div class="pfeat-chk">✓</div>5 premium design themes</li>
+        <li class="pricing-feat"><div class="pfeat-chk">✓</div>All files fully editable — yours forever</li>
+        <li class="pricing-feat"><div class="pfeat-chk">✓</div>India market data built in automatically</li>
+      </ul>
+      <hr class="pricing-divider">
+      <button class="btn btn-primary" style="width:100%;justify-content:center;font-size:15px;padding:13px" onclick="document.getElementById('startForm').scrollIntoView({behavior:'smooth'})">Start Building My Deck →</button>
+      <p style="font-size:12px;color:var(--muted);margin-top:12px;line-height:1.6;text-align:center">🔒 Secured by Razorpay · UPI · Cards · Net Banking accepted</p>
+    </div>
+  </div>
+</section>
 
 <!-- STEPS BAR -->
-<div class="steps-bar">
+<div class="steps-bar" id="startForm">
   <div class="steps-inner">
     <div class="st"><div class="st-num active" id="sc1">1</div><div class="st-lbl active" id="sl1">Your Startup</div></div>
     <div class="st"><div class="st-num" id="sc2">2</div><div class="st-lbl" id="sl2">Payment</div></div>
@@ -684,33 +475,18 @@ hr.div{border:none;border-top:1px solid var(--border-lt);margin:28px 0}
         <div class="fgrid">
           <div class="fg"><label>Team <span class="req">*</span></label><input id="team" placeholder="e.g. Ex-Swiggy ops head, IIT engineer, ex-Bain" required></div>
           <div class="fg"><label>Funding Ask</label><input id="ask" placeholder="e.g. ₹3 Crore Seed Round"></div>
-          <div class="fg full"><label>Use of Funds <span class="hint">— optional</span></label><input id="useOfFunds" placeholder="e.g. 50% dark store expansion, 30% tech, 20% marketing"></div>
+          <div class="fg full"><label>Use of Funds <span class="hint">— optional</span></label><input id="useOfFunds" placeholder="e.g. 50% expansion, 30% tech, 20% marketing"></div>
         </div>
       </div>
       <hr class="div">
       <div class="fsec">
         <div class="fsec-lbl">Deck Color Theme</div>
         <div class="theme-grid" id="themeGrid">
-          <div class="theme-opt selected" data-theme="midnight" onclick="selectTheme(this)">
-            <canvas class="theme-canvas" width="320" height="180"></canvas>
-            <div class="theme-lbl">Midnight</div>
-          </div>
-          <div class="theme-opt" data-theme="coral" onclick="selectTheme(this)">
-            <canvas class="theme-canvas" width="320" height="180"></canvas>
-            <div class="theme-lbl">Crimson</div>
-          </div>
-          <div class="theme-opt" data-theme="forest" onclick="selectTheme(this)">
-            <canvas class="theme-canvas" width="320" height="180"></canvas>
-            <div class="theme-lbl">Forest</div>
-          </div>
-          <div class="theme-opt" data-theme="ocean" onclick="selectTheme(this)">
-            <canvas class="theme-canvas" width="320" height="180"></canvas>
-            <div class="theme-lbl">Ocean</div>
-          </div>
-          <div class="theme-opt" data-theme="berry" onclick="selectTheme(this)">
-            <canvas class="theme-canvas" width="320" height="180"></canvas>
-            <div class="theme-lbl">Berry</div>
-          </div>
+          <div class="theme-opt selected" data-theme="midnight" onclick="selectTheme(this)"><canvas class="theme-canvas" width="320" height="180"></canvas><div class="theme-lbl">Midnight</div></div>
+          <div class="theme-opt" data-theme="coral" onclick="selectTheme(this)"><canvas class="theme-canvas" width="320" height="180"></canvas><div class="theme-lbl">Crimson</div></div>
+          <div class="theme-opt" data-theme="forest" onclick="selectTheme(this)"><canvas class="theme-canvas" width="320" height="180"></canvas><div class="theme-lbl">Forest</div></div>
+          <div class="theme-opt" data-theme="ocean" onclick="selectTheme(this)"><canvas class="theme-canvas" width="320" height="180"></canvas><div class="theme-lbl">Ocean</div></div>
+          <div class="theme-opt" data-theme="berry" onclick="selectTheme(this)"><canvas class="theme-canvas" width="320" height="180"></canvas><div class="theme-lbl">Berry</div></div>
         </div>
       </div>
       <div id="formErr" class="err-box">Please fill in all required fields before continuing.</div>
@@ -723,12 +499,12 @@ hr.div{border:none;border-top:1px solid var(--border-lt);margin:28px 0}
     <div class="pay-wrap">
       <div class="pay-hd"><h2>Complete your order</h2><p>One-time payment · Instant download · No subscription</p></div>
       <div class="pay-price-box">
-        <div><div class="pay-price">₹4999</div><div class="pay-price-sub">No hidden charges · Files yours forever</div></div>
+        <div><div class="pay-price">₹999</div><div class="pay-price-sub">No hidden charges · Files yours forever</div></div>
         <div class="pay-once">One-time</div>
       </div>
       <div class="pay-feats">
         <div class="pay-feat"><div class="feat-chk">✓</div>20-slide PPTX Pitch Deck (fully branded)</div>
-        <div class="pay-feat"><div class="feat-chk">✓</div>DOCX Investor One-Pager</div>
+        <div class="pay-feat"><div class="feat-chk">✓</div>Word Investor One-Pager</div>
         <div class="pay-feat"><div class="feat-chk">✓</div>PDF of complete deck</div>
         <div class="pay-feat"><div class="feat-chk">✓</div>All files fully editable</div>
       </div>
@@ -741,11 +517,11 @@ hr.div{border:none;border-top:1px solid var(--border-lt);margin:28px 0}
       </div>
       <div id="testModeBox" class="test-box">
         <div class="test-lbl">🧪 Dev / Test Mode</div>
-        <div class="test-desc">Payment is skipped. Claude will still generate a real deck using your API key.</div>
-        <button class="btn btn-primary" style="width:100%;justify-content:center;background:#f59e0b;color:#1c1917" onclick="skipPaymentAndGenerate()">Skip Payment → Generate Free</button>
+        <div class="test-desc">Payment is skipped. DeckAI will still generate a real deck.</div>
+        <button class="btn btn-primary" style="width:100%;justify-content:center;background:#F59E0B;color:#1C1917" onclick="skipPaymentAndGenerate()">Skip Payment → Generate Free</button>
       </div>
-      <button class="btn btn-primary" style="width:100%;justify-content:center;font-size:15px;padding:13px" onclick="startRazorpay()">Pay ₹4999 with Razorpay</button>
-      <p style="font-size:12px;color:var(--muted);text-align:center;margin-top:10px;line-height:1.6">🔒 Secured by Razorpay · 256-bit SSL encryption<br>Files generated and delivered immediately after payment</p>
+      <button class="btn btn-primary" style="width:100%;justify-content:center;font-size:15px;padding:13px" onclick="startRazorpay()">Pay ₹999 with Razorpay</button>
+      <p style="font-size:12px;color:var(--muted);text-align:center;margin-top:10px;line-height:1.6">🔒 Secured by Razorpay · 256-bit SSL<br>Files generated and delivered immediately after payment</p>
       <div id="payErr" class="err-box"></div>
       <div style="text-align:center;margin-top:16px"><button class="btn btn-ghost" onclick="goToStep(1)">← Edit Details</button></div>
     </div>
@@ -755,11 +531,11 @@ hr.div{border:none;border-top:1px solid var(--border-lt);margin:28px 0}
   <div class="panel" id="panel3">
     <div class="gen-wrap">
       <div class="gen-spinner"></div>
-      <div class="gen-title">Deck Engine is writing your deck…</div>
+      <div class="gen-title">Building your deck…</div>
       <div class="gen-sub">Crafting 20 investor-grade slides. Takes ~40 seconds.</div>
       <div class="prog-list">
         <div class="ps active" id="ps1"><div class="ps-icon">✦</div>Payment verified</div>
-        <div class="ps" id="ps2"><div class="ps-icon">2</div>Deck AI writing slide content</div>
+        <div class="ps" id="ps2"><div class="ps-icon">2</div>DeckAI writing slide content</div>
         <div class="ps" id="ps3"><div class="ps-icon">3</div>Building investor narrative</div>
         <div class="ps" id="ps4"><div class="ps-icon">4</div>Preparing your files</div>
       </div>
@@ -775,8 +551,8 @@ hr.div{border:none;border-top:1px solid var(--border-lt);margin:28px 0}
     </div>
     <div class="dl-grid">
       <div class="dl-card"><div class="dl-icon" style="background:var(--blue-lt)">📊</div><div class="dl-name">Pitch Deck</div><div class="dl-ext">.pptx · PowerPoint</div><button class="dl-btn" onclick="downloadFile('pptx')">↓ Download PPTX</button></div>
-      <div class="dl-card"><div class="dl-icon" style="background:#f0fdf4">📄</div><div class="dl-name">One-Pager</div><div class="dl-ext">.docx · Word</div><button class="dl-btn" onclick="downloadFile('docx')">↓ Download DOCX</button></div>
-      <div class="dl-card"><div class="dl-icon" style="background:var(--amber-lt)">📑</div><div class="dl-name">PDF Deck</div><div class="dl-ext">.pdf · Universal</div><button class="dl-btn" onclick="downloadFile('pdf')">↓ Download PDF</button></div>
+      <div class="dl-card"><div class="dl-icon" style="background:#F0FDF4">📄</div><div class="dl-name">One-Pager</div><div class="dl-ext">.docx · Word</div><button class="dl-btn" onclick="downloadFile('docx')">↓ Download DOCX</button></div>
+      <div class="dl-card"><div class="dl-icon" style="background:#FFFBEB">📑</div><div class="dl-name">PDF Deck</div><div class="dl-ext">.pdf · Universal</div><button class="dl-btn" onclick="downloadFile('pdf')">↓ Download PDF</button></div>
     </div>
     <div class="slides-preview">
       <h3>Slide Outline — 20 Slides</h3>
@@ -790,13 +566,32 @@ hr.div{border:none;border-top:1px solid var(--border-lt);margin:28px 0}
 <!-- FOOTER -->
 <footer class="site-footer">
   <div class="footer-inner">
-    <div class="footer-logo">Deck<b>AI</b></div>
-    <div class="footer-links">
-      <a class="footer-link" href="#">Privacy</a>
-      <a class="footer-link" href="#">Terms</a>
-      <a class="footer-link" href="#">Help</a>
+    <div class="footer-top">
+      <div>
+        <div class="footer-logo"><div class="footer-logo-dot"></div>DeckAI</div>
+        <div class="footer-tagline">AI-powered pitch decks built for Indian founders. From idea to investor-ready in 60 seconds.</div>
+      </div>
+      <div>
+        <div class="footer-col-title">Product</div>
+        <div class="footer-links">
+          <a class="footer-link" href="/how-it-works.html">How It Works</a>
+          <a class="footer-link" href="#startForm">Build a Deck</a>
+          <a class="footer-link" href="/pricing.html">Pricing</a>
+        </div>
+      </div>
+      <div>
+        <div class="footer-col-title">Legal</div>
+        <div class="footer-links">
+          <a class="footer-link" href="/privacy.html">Privacy Policy</a>
+          <a class="footer-link" href="/terms.html">Terms of Use</a>
+          <a class="footer-link" href="/refund.html">Refund Policy</a>
+        </div>
+      </div>
     </div>
-    <div class="footer-note">Made with ♥ for Indian founders · Powered by Deck AI</div>
+    <div class="footer-bottom">
+      <div class="footer-copy">© 2025 DeckAI · Made for Indian founders</div>
+      <div class="footer-powered">Payment by <span>Razorpay</span> · Secure checkout</div>
+    </div>
   </div>
 </footer>
 
@@ -813,87 +608,29 @@ function goToStep(n){
     else if(i===n){sc.className='st-num active';sc.textContent=i;sl.className='st-lbl active';}
     else{sc.className='st-num';sc.textContent=i;sl.className='st-lbl';}
   }
-  window.scrollTo({top:0,behavior:'smooth'});
+  document.getElementById('startForm').scrollIntoView({behavior:'smooth'});
 }
-// ── THEME CANVAS PREVIEW ──────────────────────────────────────────────────────
-const THEME_DEFS = {
-  midnight: { p:"#1E2761", a:"#F9A825", d:"#0A0F2E", sf:"#E8EDF8", lt:"#F0F4FF" },
-  coral:    { p:"#B83232", a:"#F5C842", d:"#1A0808", sf:"#FDEAEA", lt:"#FFF5F0" },
-  forest:   { p:"#1A4731", a:"#7ED957", d:"#091F12", sf:"#DCF0DC", lt:"#F0FAF0" },
-  ocean:    { p:"#0A3D6B", a:"#00C6FF", d:"#020D1A", sf:"#C8E8FF", lt:"#E8F4FF" },
-  berry:    { p:"#5C1A3A", a:"#FF6B9D", d:"#1A0010", sf:"#FFD6E8", lt:"#FFF0F5" },
-};
-
-function drawThemePreview(canvas, themeName) {
-  const th = THEME_DEFS[themeName];
-  if(!th) return;
-  const ctx = canvas.getContext("2d");
-  const W=canvas.width, H=canvas.height;
+const THEME_DEFS={midnight:{p:"#1E2761",a:"#F9A825",d:"#0A0F2E",sf:"#E8EDF8"},coral:{p:"#B83232",a:"#F5C842",d:"#1A0808",sf:"#FDEAEA"},forest:{p:"#1A4731",a:"#7ED957",d:"#091F12",sf:"#DCF0DC"},ocean:{p:"#0A3D6B",a:"#00C6FF",d:"#020D1A",sf:"#C8E8FF"},berry:{p:"#5C1A3A",a:"#FF6B9D",d:"#1A0010",sf:"#FFD6E8"}};
+function drawThemePreview(canvas,themeName){
+  const th=THEME_DEFS[themeName];if(!th)return;
+  const ctx=canvas.getContext("2d");const W=canvas.width,H=canvas.height;
   ctx.clearRect(0,0,W,H);
-
-  // Simulate COVER slide layout
-  // Left half: primary colour
-  ctx.fillStyle = th.d;
-  ctx.fillRect(0,0,W,H);
-  ctx.fillStyle = th.p;
-  ctx.fillRect(0,0,W*0.52,H);
-  // Accent divider
-  ctx.fillStyle = th.a;
-  ctx.fillRect(W*0.51,0,W*0.015,H);
-  // Bottom accent bar
-  ctx.fillRect(0,H-H*0.02,W,H*0.02);
-
-  // Company name block (3 white lines)
-  ctx.fillStyle = "rgba(255,255,255,0.95)";
-  ctx.fillRect(W*0.06, H*0.18, W*0.34, H*0.12);
-  ctx.fillStyle = "rgba(255,255,255,0.7)";
-  ctx.fillRect(W*0.06, H*0.35, W*0.28, H*0.06);
-  // Horizontal rule
-  ctx.fillStyle = "rgba(255,255,255,0.4)";
-  ctx.fillRect(W*0.06, H*0.46, W*0.16, H*0.015);
-  // 3 bullet lines
-  [0.54, 0.63, 0.72].forEach(yp => {
-    ctx.fillStyle = th.a;
-    ctx.fillRect(W*0.06, H*yp, W*0.012, H*0.065);
-    ctx.fillStyle = "rgba(255,255,255,0.5)";
-    ctx.fillRect(W*0.09, H*yp+H*0.015, W*0.30, H*0.035);
-  });
-
-  // Stat card right side
-  ctx.fillStyle = "rgba(255,255,255,0.95)";
-  const cx=W*0.60, cy=H*0.18, cw=W*0.36, ch=H*0.56;
-  ctx.fillRect(cx,cy,cw,ch);
-  // Accent top bar on card
-  ctx.fillStyle = th.a;
-  ctx.fillRect(cx,cy,cw,ch*0.06);
-  // Big stat number area
-  ctx.fillStyle = th.p;
-  ctx.font = `bold ${H*0.22}px Arial`;
-  ctx.textAlign = "center";
-  ctx.fillText("₹8L", cx+cw/2, cy+ch*0.48);
-  // Stat label
-  ctx.fillStyle = "#888";
-  ctx.font = `${H*0.07}px Arial`;
-  ctx.fillText("MRR", cx+cw/2, cy+ch*0.72);
+  ctx.fillStyle=th.d;ctx.fillRect(0,0,W,H);
+  ctx.fillStyle=th.p;ctx.fillRect(0,0,W*0.52,H);
+  ctx.fillStyle=th.a;ctx.fillRect(W*0.51,0,W*0.015,H);ctx.fillRect(0,H-H*0.02,W,H*0.02);
+  ctx.fillStyle="rgba(255,255,255,0.95)";ctx.fillRect(W*0.06,H*0.18,W*0.34,H*0.12);
+  ctx.fillStyle="rgba(255,255,255,0.7)";ctx.fillRect(W*0.06,H*0.35,W*0.28,H*0.06);
+  ctx.fillStyle="rgba(255,255,255,0.4)";ctx.fillRect(W*0.06,H*0.46,W*0.16,H*0.015);
+  [0.54,0.63,0.72].forEach(yp=>{ctx.fillStyle=th.a;ctx.fillRect(W*0.06,H*yp,W*0.012,H*0.065);ctx.fillStyle="rgba(255,255,255,0.5)";ctx.fillRect(W*0.09,H*yp+H*0.015,W*0.30,H*0.035);});
+  ctx.fillStyle="rgba(255,255,255,0.95)";const cx=W*0.60,cy=H*0.18,cw=W*0.36,ch=H*0.56;ctx.fillRect(cx,cy,cw,ch);
+  ctx.fillStyle=th.a;ctx.fillRect(cx,cy,cw,ch*0.06);
+  ctx.fillStyle=th.p;ctx.font=`bold ${H*0.22}px Arial`;ctx.textAlign="center";ctx.fillText("₹8L",cx+cw/2,cy+ch*0.48);
+  ctx.fillStyle="#888";ctx.font=`${H*0.07}px Arial`;ctx.fillText("MRR",cx+cw/2,cy+ch*0.72);
 }
-
-function renderAllThemePreviews(){
-  document.querySelectorAll(".theme-opt").forEach(opt=>{
-    const canvas = opt.querySelector(".theme-canvas");
-    if(canvas) drawThemePreview(canvas, opt.dataset.theme);
-  });
-}
-
-// Call on DOM ready
-document.addEventListener("DOMContentLoaded", renderAllThemePreviews);
-// Also call immediately in case DOM is already ready
-if(document.readyState !== "loading") renderAllThemePreviews();
-
-function selectTheme(el){
-  document.querySelectorAll('.theme-opt').forEach(t=>t.classList.remove('selected'));
-  el.classList.add('selected');
-  selectedTheme=el.dataset.theme;
-}
+function renderAllThemePreviews(){document.querySelectorAll(".theme-opt").forEach(opt=>{const canvas=opt.querySelector(".theme-canvas");if(canvas)drawThemePreview(canvas,opt.dataset.theme);});}
+document.addEventListener("DOMContentLoaded",renderAllThemePreviews);
+if(document.readyState!=="loading")renderAllThemePreviews();
+function selectTheme(el){document.querySelectorAll('.theme-opt').forEach(t=>t.classList.remove('selected'));el.classList.add('selected');selectedTheme=el.dataset.theme;}
 function setProgress(step){for(let i=1;i<=4;i++){const ps=document.getElementById('ps'+i);if(!ps)continue;if(i<step){ps.className='ps done';ps.querySelector('.ps-icon').textContent='✓';}else if(i===step){ps.className='ps active';ps.querySelector('.ps-icon').textContent='✦';}else{ps.className='ps';ps.querySelector('.ps-icon').textContent=i;}}}
 document.getElementById('startupForm').addEventListener('submit',async(e)=>{
   e.preventDefault();const err=document.getElementById('formErr');err.style.display='none';
@@ -907,7 +644,7 @@ async function startRazorpay(){
     const or=await fetch('/api/payment/create-order',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({formData:currentFormData,theme:selectedTheme})});
     if(!or.ok)throw new Error('Failed to create order');
     const od=await or.json();currentSessionId=od.sessionId;
-    const rzp=new Razorpay({key:od.keyId,amount:od.amount,currency:od.currency,name:'DeckAI',description:'AI Pitch Deck — '+currentFormData.startupName,order_id:od.orderId,handler:async function(r){await verifyAndGenerate(r);},prefill:{name:currentFormData.startupName},theme:{color:'#1a4fff'},modal:{ondismiss:function(){pe.style.display='block';pe.textContent='Payment cancelled. Try again when ready.';}}});
+    const rzp=new Razorpay({key:od.keyId,amount:od.amount,currency:od.currency,name:'DeckAI',description:'AI Pitch Deck — '+currentFormData.startupName,order_id:od.orderId,handler:async function(r){await verifyAndGenerate(r);},prefill:{name:currentFormData.startupName},theme:{color:'#1847F0'},modal:{ondismiss:function(){pe.style.display='block';pe.textContent='Payment cancelled. Try again when ready.';}}});
     rzp.open();
   }catch(err){pe.style.display='block';pe.textContent='❌ '+(err.message||'Payment setup failed.');}
 }
@@ -923,16 +660,14 @@ async function verifyAndGenerate(pr){
     renderPreview(gd.deckData);goToStep(4);
   }catch(err){const ge=document.getElementById('genErr');ge.style.display='block';ge.textContent='❌ '+(err.message||'Something went wrong.');}
 }
-function renderPreview(deckData){
-  document.getElementById('slidesPreview').innerHTML=deckData.slides.map(s=>`<div class="slide-thumb"><div class="sn">Slide ${s.slideNumber}${s.act?' · '+s.act:''}</div><div class="st2">${s.title}</div><div class="sb">${(s.bullets||[]).slice(0,1).join('')}</div></div>`).join('');
-}
+function renderPreview(deckData){document.getElementById('slidesPreview').innerHTML=deckData.slides.map(s=>`<div class="slide-thumb"><div class="sn">Slide ${s.slideNumber}${s.act?' · '+s.act:''}</div><div class="st2">${s.title}</div><div class="sb">${(s.bullets||[]).slice(0,1).join('')}</div></div>`).join('');}
 function downloadFile(type){if(!currentSessionId)return;window.location.href=`/api/download/${type}/${currentSessionId}`;}
 function delay(ms){return new Promise(r=>setTimeout(r,ms));}
 async function skipPaymentAndGenerate(){
   const pe=document.getElementById('payErr');pe.style.display='none';
   try{
     const r=await fetch('/api/dev/test-session',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({formData:currentFormData,theme:selectedTheme})});
-    if(!r.ok)throw new Error('Could not create test session. Is NODE_ENV=development in .env?');
+    if(!r.ok)throw new Error('Could not create test session. Is NODE_ENV=development?');
     const d=await r.json();currentSessionId=d.sessionId;
     goToStep(3);setProgress(1);
     const gr=await fetch('/api/generate',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({sessionId:currentSessionId})});

@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Pricing — DeckAI</title>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,600;0,9..144,700;1,9..144,600&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{--blue:#1847F0;--blue-dk:#1038c8;--blue-lt:#EEF2FF;--amber:#F59E0B;--green:#059669;--red:#DC2626;--ink:#0F0D0A;--sub:#4B4640;--muted:#8C8780;--border:#E2DDD6;--border-lt:#EDEBE6;--page:#F7F4EF;--section:#EDE9E2;--card:#FDFCFA;--white:#FFFFFF}
+body{font-family:'Plus Jakarta Sans',sans-serif;background:var(--page);color:var(--ink);font-size:15px;line-height:1.6;-webkit-font-smoothing:antialiased}
+*{position:relative;z-index:1}
+.nav{height:64px;border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;padding:0 48px;background:rgba(247,244,239,0.96);backdrop-filter:blur(20px);position:sticky;top:0;z-index:100}
+.logo{font-family:'Fraunces',serif;font-size:22px;color:var(--ink);letter-spacing:-0.5px;display:flex;align-items:center;gap:8px;text-decoration:none}
+.logo-dot{width:8px;height:8px;border-radius:50%;background:var(--blue);flex-shrink:0}
+.nav-cta{font-size:12px;font-weight:600;color:#fff;padding:7px 16px;border-radius:20px;background:var(--blue);text-decoration:none;transition:all .15s}
+.nav-cta:hover{background:var(--blue-dk)}
+.page-hero{padding:72px 48px 56px;border-bottom:1px solid var(--border);background:var(--white);text-align:center}
+.eyebrow{font-size:11px;font-weight:700;color:var(--blue);letter-spacing:.12em;text-transform:uppercase;margin-bottom:12px}
+.page-title{font-family:'Fraunces',serif;font-size:clamp(32px,4vw,54px);letter-spacing:-1px;color:var(--ink);margin-bottom:16px;line-height:1.08}
+.page-sub{font-size:17px;color:var(--sub);max-width:520px;margin:0 auto;line-height:1.7}
+.content{max-width:640px;margin:0 auto;padding:64px 48px 96px}
+.price-card{background:var(--card);border:1.5px solid var(--border);border-radius:20px;overflow:hidden;margin-bottom:36px}
+.price-card-top{background:var(--blue);padding:32px 36px;text-align:center}
+.price-badge{display:inline-block;background:rgba(255,255,255,0.15);color:#fff;font-size:11px;font-weight:700;padding:4px 12px;border-radius:20px;letter-spacing:.05em;text-transform:uppercase;margin-bottom:16px}
+.price-amount{font-family:'Fraunces',serif;font-size:72px;font-weight:600;color:#fff;letter-spacing:-2px;line-height:1}
+.price-amount sup{font-size:28px;vertical-align:top;margin-top:14px;display:inline-block}
+.price-once{font-size:14px;color:rgba(255,255,255,.6);margin-top:6px}
+.price-card-body{padding:32px 36px}
+.feat-section-title{font-size:11px;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:.08em;margin-bottom:14px;margin-top:24px}
+.feat-section-title:first-child{margin-top:0}
+.feat-list{display:flex;flex-direction:column;gap:11px;margin-bottom:4px}
+.feat-row{display:flex;align-items:center;gap:11px;font-size:14px;color:var(--ink)}
+.feat-chk{width:22px;height:22px;border-radius:50%;background:#DCFCE7;color:var(--green);display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:700;flex-shrink:0}
+.feat-cross{width:22px;height:22px;border-radius:50%;background:#FEF2F2;color:#EF4444;display:flex;align-items:center;justify-content:center;font-size:14px;font-weight:700;flex-shrink:0}
+.divider{border:none;border-top:1px solid var(--border-lt);margin:22px 0}
+.pay-btn{display:block;width:100%;padding:14px;background:var(--blue);color:#fff;border:none;border-radius:10px;font-family:'Plus Jakarta Sans',sans-serif;font-size:15px;font-weight:700;cursor:pointer;text-align:center;text-decoration:none;transition:all .15s;margin-top:24px}
+.pay-btn:hover{background:var(--blue-dk);transform:translateY(-1px)}
+.pay-note{font-size:12px;color:var(--muted);text-align:center;margin-top:10px;line-height:1.6}
+.compare-section{background:var(--section);border-top:1px solid var(--border);padding:56px 48px}
+.compare-inner{max-width:860px;margin:0 auto}
+.compare-title{font-family:'Fraunces',serif;font-size:30px;color:var(--ink);margin-bottom:8px}
+.compare-sub{font-size:15px;color:var(--sub);margin-bottom:36px}
+.compare-table{width:100%;border-collapse:collapse}
+.compare-table th{font-size:12px;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:.07em;padding:10px 16px;border-bottom:2px solid var(--border);text-align:left}
+.compare-table th:not(:first-child){text-align:center}
+.compare-table td{padding:12px 16px;font-size:14px;color:var(--sub);border-bottom:1px solid var(--border-lt)}
+.compare-table td:first-child{font-weight:500;color:var(--ink)}
+.compare-table td:not(:first-child){text-align:center}
+.compare-table tr:last-child td{border:none}
+.yes{color:var(--green);font-weight:700}
+.no{color:var(--muted)}
+.highlight-col{background:rgba(24,71,240,0.04)}
+.cta-strip{background:var(--ink);padding:52px 48px;text-align:center}
+.cta-strip h2{font-family:'Fraunces',serif;font-size:36px;color:#fff;margin-bottom:12px}
+.cta-strip p{font-size:16px;color:rgba(255,255,255,.55);margin-bottom:28px}
+.cta-btn{display:inline-flex;align-items:center;gap:8px;padding:14px 32px;background:#fff;color:var(--blue);border-radius:10px;font-size:15px;font-weight:700;text-decoration:none;transition:all .15s}
+.cta-btn:hover{background:var(--blue-lt);transform:translateY(-2px)}
+footer{background:var(--ink);padding:28px 48px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px;border-top:1px solid rgba(255,255,255,0.06)}
+.foot-logo{font-family:'Fraunces',serif;font-size:18px;color:#fff;display:flex;align-items:center;gap:7px}
+.foot-dot{width:6px;height:6px;border-radius:50%;background:var(--blue)}
+.foot-links{display:flex;gap:20px}
+.foot-link{font-size:12.5px;color:rgba(255,255,255,.4);text-decoration:none}
+.foot-link:hover{color:#fff}
+.foot-copy{font-size:12px;color:rgba(255,255,255,.22)}
+@media(max-width:768px){.nav,.page-hero,.content,.compare-section,.cta-strip,footer{padding-left:20px;padding-right:20px}.compare-table{font-size:12px}}
+</style>
+</head>
+<body>
+<nav class="nav">
+  <a class="logo" href="/"><div class="logo-dot"></div>DeckAI</a>
+  <a class="nav-cta" href="/#startForm">Build My Deck →</a>
+</nav>
+
+<div class="page-hero">
+  <div class="eyebrow">Pricing</div>
+  <h1 class="page-title">One price.<br><em>Everything included.</em></h1>
+  <p class="page-sub">No subscription. No upsells. No surprise charges. Pay once and your files are yours forever.</p>
+</div>
+
+<div class="content">
+  <div class="price-card">
+    <div class="price-card-top">
+      <div class="price-badge">Complete Package</div>
+      <div class="price-amount"><sup>₹</sup>999</div>
+      <div class="price-once">One-time payment · No renewal · No subscription</div>
+    </div>
+    <div class="price-card-body">
+      <div class="feat-section-title">Files you receive</div>
+      <div class="feat-list">
+        <div class="feat-row"><div class="feat-chk">✓</div>20-slide PowerPoint PPTX (fully branded, fully editable)</div>
+        <div class="feat-row"><div class="feat-chk">✓</div>PDF version of complete deck</div>
+        <div class="feat-row"><div class="feat-chk">✓</div>Word DOCX Investor One-Pager</div>
+      </div>
+      <div class="feat-section-title">What's inside the deck</div>
+      <div class="feat-list">
+        <div class="feat-row"><div class="feat-chk">✓</div>20 investor-grade narrative slides</div>
+        <div class="feat-row"><div class="feat-chk">✓</div>5-act Airbnb-style story structure</div>
+        <div class="feat-row"><div class="feat-chk">✓</div>India-specific market data for your sector</div>
+        <div class="feat-row"><div class="feat-chk">✓</div>Your choice of 5 premium colour themes</div>
+        <div class="feat-row"><div class="feat-chk">✓</div>8 unique slide layout types</div>
+        <div class="feat-row"><div class="feat-chk">✓</div>Competitor framing and market positioning</div>
+      </div>
+      <div class="feat-section-title">What you won't pay for</div>
+      <div class="feat-list">
+        <div class="feat-row"><div class="feat-cross">✗</div><span style="color:var(--muted)">Monthly subscription</span></div>
+        <div class="feat-row"><div class="feat-cross">✗</div><span style="color:var(--muted)">Account creation required</span></div>
+        <div class="feat-row"><div class="feat-cross">✗</div><span style="color:var(--muted)">Hidden fees or add-ons</span></div>
+        <div class="feat-row"><div class="feat-cross">✗</div><span style="color:var(--muted)">Watermarks on files</span></div>
+      </div>
+      <hr class="divider">
+      <a class="pay-btn" href="/#startForm">Build My Deck for ₹999 →</a>
+      <div class="pay-note">🔒 Secured by Razorpay · UPI · GPay · PhonePe · Cards · NetBanking</div>
+    </div>
+  </div>
+</div>
+
+<div class="compare-section">
+  <div class="compare-inner">
+    <div class="compare-title">How DeckAI compares</div>
+    <div class="compare-sub">You could spend weeks building this yourself, or ₹50,000+ on a design agency. Here's what the alternatives look like.</div>
+    <table class="compare-table">
+      <tr>
+        <th>Option</th>
+        <th class="highlight-col">DeckAI</th>
+        <th>Design Agency</th>
+        <th>DIY (PowerPoint)</th>
+        <th>Fiverr Freelancer</th>
+      </tr>
+      <tr>
+        <td>Cost</td>
+        <td class="highlight-col yes">₹999</td>
+        <td>₹30,000–₹1,00,000</td>
+        <td>Your time (3–7 days)</td>
+        <td>₹5,000–₹25,000</td>
+      </tr>
+      <tr>
+        <td>Time to complete</td>
+        <td class="highlight-col yes">~60 seconds</td>
+        <td>1–3 weeks</td>
+        <td>Several days</td>
+        <td>2–5 days</td>
+      </tr>
+      <tr>
+        <td>India market data</td>
+        <td class="highlight-col yes">✓ Built in</td>
+        <td>You provide it</td>
+        <td>You research it</td>
+        <td>You provide it</td>
+      </tr>
+      <tr>
+        <td>Investor narrative structure</td>
+        <td class="highlight-col yes">✓ Automatic</td>
+        <td>Depends on agency</td>
+        <td>You decide</td>
+        <td>Depends on freelancer</td>
+      </tr>
+      <tr>
+        <td>Fully editable files</td>
+        <td class="highlight-col yes">✓ PPTX + DOCX + PDF</td>
+        <td>Sometimes extra cost</td>
+        <td>✓</td>
+        <td>Usually yes</td>
+      </tr>
+      <tr>
+        <td>Revisions included</td>
+        <td class="highlight-col">Edit yourself instantly</td>
+        <td>Limited, paid extra</td>
+        <td>Unlimited (your time)</td>
+        <td>1–2 rounds</td>
+      </tr>
+    </table>
+  </div>
+</div>
+
+<div class="cta-strip">
+  <h2>₹999 for an investor-ready deck</h2>
+  <p>Less than a dinner out. Takes 3 minutes to fill the form.</p>
+  <a class="cta-btn" href="/#startForm">Start Building →</a>
+</div>
+
+<footer>
+  <div class="foot-logo"><div class="foot-dot"></div>DeckAI</div>
+  <div class="foot-links">
+    <a class="foot-link" href="/how-it-works.html">How It Works</a>
+    <a class="foot-link" href="/pricing.html">Pricing</a>
+    <a class="foot-link" href="/privacy.html">Privacy</a>
+    <a class="foot-link" href="/terms.html">Terms</a>
+    <a class="foot-link" href="/refund.html">Refund</a>
+  </div>
+  <div class="foot-copy">© 2025 DeckAI</div>
+</footer>
+</body>
+</html>

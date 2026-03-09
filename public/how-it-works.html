@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>How It Works — DeckAI</title>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,600;0,9..144,700;1,9..144,600&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{--blue:#1847F0;--blue-dk:#1038c8;--blue-lt:#EEF2FF;--amber:#F59E0B;--green:#059669;--ink:#0F0D0A;--sub:#4B4640;--muted:#8C8780;--border:#E2DDD6;--border-lt:#EDEBE6;--page:#F7F4EF;--section:#EDE9E2;--card:#FDFCFA;--white:#FFFFFF}
+body{font-family:'Plus Jakarta Sans',sans-serif;background:var(--page);color:var(--ink);font-size:15px;line-height:1.6;-webkit-font-smoothing:antialiased}
+*{position:relative;z-index:1}
+.nav{height:64px;border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;padding:0 48px;background:rgba(247,244,239,0.96);backdrop-filter:blur(20px);position:sticky;top:0;z-index:100}
+.logo{font-family:'Fraunces',serif;font-size:22px;color:var(--ink);letter-spacing:-0.5px;display:flex;align-items:center;gap:8px;text-decoration:none}
+.logo-dot{width:8px;height:8px;border-radius:50%;background:var(--blue);flex-shrink:0}
+.nav-cta{font-size:12px;font-weight:600;color:#fff;padding:7px 16px;border-radius:20px;background:var(--blue);text-decoration:none;transition:all .15s}
+.nav-cta:hover{background:var(--blue-dk)}
+.page-hero{padding:72px 48px 56px;border-bottom:1px solid var(--border);background:var(--white);text-align:center}
+.eyebrow{font-size:11px;font-weight:700;color:var(--blue);letter-spacing:.12em;text-transform:uppercase;margin-bottom:12px}
+.page-title{font-family:'Fraunces',serif;font-size:clamp(32px,4vw,54px);letter-spacing:-1px;color:var(--ink);margin-bottom:16px;line-height:1.08}
+.page-sub{font-size:17px;color:var(--sub);max-width:520px;margin:0 auto;line-height:1.7}
+.content{max-width:860px;margin:0 auto;padding:64px 48px 96px}
+.step-block{display:grid;grid-template-columns:80px 1fr;gap:32px;align-items:start;margin-bottom:56px;padding-bottom:56px;border-bottom:1px solid var(--border-lt)}
+.step-block:last-of-type{border:none}
+.step-num-big{font-family:'Fraunces',serif;font-size:56px;color:var(--blue);opacity:.18;line-height:1;text-align:right;padding-top:4px}
+.step-content{}
+.step-title{font-family:'Fraunces',serif;font-size:26px;color:var(--ink);letter-spacing:-.4px;margin-bottom:12px}
+.step-desc{font-size:15px;color:var(--sub);line-height:1.75;margin-bottom:18px}
+.step-tips{background:var(--blue-lt);border-radius:10px;padding:16px 20px;display:flex;flex-direction:column;gap:8px}
+.step-tip{display:flex;align-items:flex-start;gap:9px;font-size:13.5px;color:var(--ink);line-height:1.5}
+.tip-dot{width:5px;height:5px;border-radius:50%;background:var(--blue);margin-top:6px;flex-shrink:0}
+.faq-section{background:var(--section);border-top:1px solid var(--border);padding:56px 48px}
+.faq-inner{max-width:860px;margin:0 auto}
+.faq-title{font-family:'Fraunces',serif;font-size:30px;color:var(--ink);margin-bottom:32px}
+.faq-item{border-bottom:1px solid var(--border);padding:18px 0}
+.faq-q{font-size:15px;font-weight:700;color:var(--ink);margin-bottom:8px}
+.faq-a{font-size:14px;color:var(--sub);line-height:1.7}
+.cta-strip{background:var(--blue);padding:52px 48px;text-align:center}
+.cta-strip h2{font-family:'Fraunces',serif;font-size:36px;color:#fff;margin-bottom:12px}
+.cta-strip p{font-size:16px;color:rgba(255,255,255,.65);margin-bottom:28px}
+.cta-btn{display:inline-flex;align-items:center;gap:8px;padding:14px 32px;background:#fff;color:var(--blue);border-radius:10px;font-size:15px;font-weight:700;text-decoration:none;transition:all .15s}
+.cta-btn:hover{background:var(--blue-lt);transform:translateY(-2px)}
+footer{background:var(--ink);padding:28px 48px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px}
+.foot-logo{font-family:'Fraunces',serif;font-size:18px;color:#fff;display:flex;align-items:center;gap:7px}
+.foot-dot{width:6px;height:6px;border-radius:50%;background:var(--blue)}
+.foot-links{display:flex;gap:20px}
+.foot-link{font-size:12.5px;color:rgba(255,255,255,.4);text-decoration:none}
+.foot-link:hover{color:#fff}
+.foot-copy{font-size:12px;color:rgba(255,255,255,.22)}
+@media(max-width:768px){.nav,.page-hero,.content,.faq-section,.cta-strip,footer{padding-left:20px;padding-right:20px}.step-block{grid-template-columns:50px 1fr;gap:16px}.step-num-big{font-size:36px}}
+</style>
+</head>
+<body>
+<nav class="nav">
+  <a class="logo" href="/"><div class="logo-dot"></div>DeckAI</a>
+  <a class="nav-cta" href="/#startForm">Build My Deck →</a>
+</nav>
+
+<div class="page-hero">
+  <div class="eyebrow">How It Works</div>
+  <h1 class="page-title">From blank page to<br><em>investor-ready</em> in 60 seconds</h1>
+  <p class="page-sub">DeckAI turns your startup details into a fully structured, beautifully designed pitch deck — no design skills, no consultants, no delays.</p>
+</div>
+
+<div class="content">
+
+  <div class="step-block">
+    <div class="step-num-big">01</div>
+    <div class="step-content">
+      <div class="step-title">Describe your startup</div>
+      <div class="step-desc">Fill a short form with the key details about your business. You'll answer questions about your problem, solution, market size, business model, traction, team, and funding ask. The whole form takes about 3 minutes to complete.</div>
+      <div class="step-desc">You don't need to have all the answers — the more you provide, the stronger your deck. But even a minimal input will generate a complete, coherent narrative.</div>
+      <div class="step-tips">
+        <div class="step-tip"><div class="tip-dot"></div>Use real numbers wherever possible — "₹8L MRR" is stronger than "good revenue"</div>
+        <div class="step-tip"><div class="tip-dot"></div>Name your specific customers — "urban dual-income families in Pune" beats "busy professionals"</div>
+        <div class="step-tip"><div class="tip-dot"></div>Include your team's relevant credentials — past company names, IIT/IIM, previous exits</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="step-block">
+    <div class="step-num-big">02</div>
+    <div class="step-content">
+      <div class="step-title">DeckAI builds your narrative</div>
+      <div class="step-desc">After payment, DeckAI's AI engine processes your inputs and builds a complete 20-slide pitch deck in approximately 40 seconds. It uses a proven investor narrative structure — the same 5-act arc used by Airbnb, Sequoia, and top YC companies.</div>
+      <div class="step-desc">The engine automatically pulls in India-specific market data, competitor context, and investor framing relevant to your industry. You don't need to research any of this yourself.</div>
+      <div class="step-tips">
+        <div class="step-tip"><div class="tip-dot"></div>Act 1 — The World Today: sets context with India market data</div>
+        <div class="step-tip"><div class="tip-dot"></div>Act 2 — The Revelation: your specific problem + why now</div>
+        <div class="step-tip"><div class="tip-dot"></div>Act 3 — Proof of Concept: your solution, traction, and team</div>
+        <div class="step-tip"><div class="tip-dot"></div>Act 4 — The Future: market opportunity and growth vision</div>
+        <div class="step-tip"><div class="tip-dot"></div>Act 5 — The Ask: funding request, use of funds, why you win</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="step-block">
+    <div class="step-num-big">03</div>
+    <div class="step-content">
+      <div class="step-title">Download your files instantly</div>
+      <div class="step-desc">Once generation is complete, you'll see a download screen with all three files ready immediately. No waiting, no email, no account needed. Files are generated and served directly from the platform.</div>
+      <div class="step-desc">All three formats are included in a single ₹999 payment — no upsells, no add-ons.</div>
+      <div class="step-tips">
+        <div class="step-tip"><div class="tip-dot"></div><strong>PPTX</strong> — Fully editable PowerPoint. Customise fonts, add your logo, tweak any slide before your pitch</div>
+        <div class="step-tip"><div class="tip-dot"></div><strong>PDF</strong> — Share via email or WhatsApp. Looks identical to the PPTX on any device</div>
+        <div class="step-tip"><div class="tip-dot"></div><strong>Word DOCX</strong> — One-page executive summary. Send this before the meeting so investors arrive prepared</div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<div class="faq-section">
+  <div class="faq-inner">
+    <div class="faq-title">Common questions</div>
+    <div class="faq-item"><div class="faq-q">How specific is the India market data?</div><div class="faq-a">The deck includes industry-specific data for Fintech, Healthtech, Edtech, SaaS/B2B, E-commerce, Agritech, Logistics, Consumer Apps, Deep Tech, and Cleantech. It references sector market sizes, growth rates, digital adoption context, and relevant infrastructure (UPI, Aadhaar, ONDC etc.) where applicable.</div></div>
+    <div class="faq-item"><div class="faq-q">Can I edit the deck after downloading?</div><div class="faq-a">Yes — the PPTX is fully editable in Microsoft PowerPoint or Google Slides. You can change any text, swap colours, add your company logo, or adjust any slide to match your brand. The files are yours forever.</div></div>
+    <div class="faq-item"><div class="faq-q">What if I'm not happy with the output?</div><div class="faq-a">Most founders are satisfied and edit lightly. If you feel the deck missed something important, it's usually because the form input was brief — try being more specific about your traction, competitors, or customer profile. See our refund policy for more details.</div></div>
+    <div class="faq-item"><div class="faq-q">How long does generation actually take?</div><div class="faq-a">Typically 35–55 seconds after payment confirmation. The AI is writing 20 full slides of narrative content simultaneously, which is why it takes slightly longer than a simple text query.</div></div>
+    <div class="faq-item"><div class="faq-q">Do I need an account?</div><div class="faq-a">No account needed. Pay once, download immediately. We recommend downloading your files right after generation as sessions expire after 24 hours.</div></div>
+  </div>
+</div>
+
+<div class="cta-strip">
+  <h2>Ready to build your deck?</h2>
+  <p>Takes 3 minutes to fill. 60 seconds to generate. ₹999 one-time.</p>
+  <a class="cta-btn" href="/#startForm">Start Building →</a>
+</div>
+
+<footer>
+  <div class="foot-logo"><div class="foot-dot"></div>DeckAI</div>
+  <div class="foot-links">
+    <a class="foot-link" href="/how-it-works.html">How It Works</a>
+    <a class="foot-link" href="/pricing.html">Pricing</a>
+    <a class="foot-link" href="/privacy.html">Privacy</a>
+    <a class="foot-link" href="/terms.html">Terms</a>
+    <a class="foot-link" href="/refund.html">Refund</a>
+  </div>
+  <div class="foot-copy">© 2025 DeckAI</div>
+</footer>
+</body>
+</html>
